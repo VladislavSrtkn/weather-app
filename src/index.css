@@ -10,7 +10,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.test {
-  background-image: url(./pictures/cloud-in-blue-sky.jpg);
-  background-size: cover;
+.forecast-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.weather-plates-box {
+  display: flex;
+  flex-wrap: wrap;
 }

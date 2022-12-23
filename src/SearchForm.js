@@ -1,22 +1,29 @@
-import { IconButton, TextField } from '@mui/material';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { TextField } from '@mui/material';
 
-export default function SearchForm({ value, changeHandler, submitHandler }) {
+export default function SearchForm({
+  value,
+  changeHandler,
+  submitHandler,
+  searchResults,
+  addCityHandler,
+}) {
+  const foundCities = searchResults.slice(0, 5).map((city) => (
+    <li key={city.name} onClick={() => addCityHandler(city.name)}>
+      {city.name}
+    </li>
+  ));
+
   return (
-    <Grid2 container>
-      <form onSubmit={(e) => submitHandler(e)}>
-        <TextField
-          size='small'
-          variant='outlined'
-          label='Search'
-          value={value}
-          onChange={(e) => changeHandler(e.target.value)}
-        ></TextField>
-        <IconButton type='submit' style={{ color: 'green' }}>
-          <AddCircleIcon />
-        </IconButton>
-      </form>
-    </Grid2>
+    <form style={{ margin: '1rem', flex: 2 }} onSubmit={(e) => submitHandler(e)}>
+      <TextField
+        size='normal'
+        variant='outlined'
+        label='Search'
+        sx={{ width: '100%' }}
+        value={value}
+        onChange={(e) => changeHandler(e)}
+      ></TextField>
+      <ul>{foundCities}</ul>
+    </form>
   );
 }

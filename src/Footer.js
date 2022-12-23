@@ -1,5 +1,3 @@
-import { textAlign } from '@mui/system';
-
 export default function Footer() {
   return (
     <footer style={{ textAlign: 'center' }}>
