@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Card } from '@mui/material';
+import { Button, Card } from '@mui/material';
 import ForecastPlate from './ForecastPlate';
+import IconButton from '@mui/material/IconButton';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 export default function WeatherPlate({ city, removeHandler, scale }) {
   const [isValid, setIsValid] = useState(false);
@@ -24,26 +28,69 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
     isValid && (
       <Card
         sx={{
-          maxWidth: 345,
-          minWidth: 280,
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          maxWidth: '700px',
           margin: '1rem',
           padding: '0.5rem',
           height: 'fit-content',
+          position: 'relative',
         }}
-        className={'test'}
       >
-        <h4>
+        <IconButton
+          sx={{ position: 'absolute', right: 0, top: 0 }}
+          aria-label='delete'
+          onClick={() => removeHandler(city)}
+        >
+          <HighlightOffIcon fontSize='large' />
+        </IconButton>
+
+        <h3>
           {weather.location.name}, {weather.location.country}
-        </h4>
-        <p>Temp: {weather.current[`temp_${scale}`]}°</p>
-        <p>Condition: {weather.current.condition.text} </p>
+        </h3>
+
+        <h2>
+          {weather.current[`temp_${scale}`] >= 0
+            ? `+${weather.current[`temp_${scale}`]}`
+            : weather.current[`temp_${scale}`]}
+          °<img src={weather.current.condition.icon}></img>
+        </h2>
+
         <p>
           Min: {weather.forecast.forecastday[0].day[`mintemp_${scale}`]}°, Max:
           {weather.forecast.forecastday[0].day[`maxtemp_${scale}`]}°
         </p>
-        <p>Feels like: {weather.current[`feelslike_${scale}`]}°</p>
-        <button onClick={() => removeHandler(city)}>Remove</button>
-        <button onClick={() => setForcastVisibility(!forecastVisibility)}>Forecast</button>
+
+        <div>
+          <span style={{ paddingRight: '2rem', display: 'inline-block', marginBottom: '1rem' }}>
+            Feels like {weather.current[`feelslike_${scale}`]}°
+          </span>
+          <span style={{ paddingRight: '2rem', display: 'inline-block', marginBottom: '1rem' }}>
+            {' '}
+            {weather.current.condition.text}{' '}
+          </span>
+          <span
+            style={{
+              paddingRight: '2rem',
+              display: 'inline-block',
+              marginBottom: '1rem',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Сhance of rain: {weather.forecast.forecastday[0].day.daily_chance_of_rain}%
+          </span>
+        </div>
+
+        <Button
+          variant='text'
+          sx={{ marginY: '2rem', width: '100%' }}
+          onClick={() => setForcastVisibility(!forecastVisibility)}
+        >
+          Show 6-hours forecast
+          {!forecastVisibility ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
+        </Button>
+
         {forecastVisibility && <ForecastPlate weather={weather} scale={scale} />}
       </Card>
     )

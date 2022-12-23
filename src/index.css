@@ -15,8 +15,3 @@ code {
   justify-content: space-between;
   padding: 0.5rem;
 }
-
-.weather-plates-box {
-  display: flex;
-  flex-wrap: wrap;
-}

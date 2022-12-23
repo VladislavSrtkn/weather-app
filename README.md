@@ -1,4 +1,4 @@
 Weather App
 
-TODO:
-добавить поиск - получать массив + отрисовывать элемент - подсказку
+TODO :
+add forecast for 5-7 days

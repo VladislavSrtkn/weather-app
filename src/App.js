@@ -8,7 +8,13 @@ import { Container } from '@mui/system';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 function App() {
-  const [cities, setCities] = useState(['Podgorica', 'Toronto', 'Saint-Petersburg', 'Belgrad']);
+  const [cities, setCities] = useState([
+    'auto:ip',
+    'Podgorica',
+    'Toronto',
+    'Saint-Petersburg',
+    'Belgrade',
+  ]);
   const [scale, setScale] = useState('c');
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -53,21 +59,25 @@ function App() {
   ));
 
   return (
-    <Container>
+    <>
       <Header />
-      <Grid2 container direction='row' alignItems='flex-start'>
-        <SearchForm
-          value={searchValue}
-          changeHandler={searchHandler}
-          submitHandler={addCityBySubmit}
-          searchResults={searchResults}
-          addCityHandler={addCityByClick}
-        />
-        <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
-      </Grid2>
-      <div className='weather-plates-box'>{weatherPlates}</div>
-      <Footer />
-    </Container>
+      <Container>
+        <Grid2 container direction='row' alignItems='flex-start'>
+          <SearchForm
+            value={searchValue}
+            searchResults={searchResults}
+            changeHandler={searchHandler}
+            submitHandler={addCityBySubmit}
+            clickHandler={addCityByClick}
+          />
+          <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
+        </Grid2>
+        <Grid2 container justifyContent='center'>
+          {weatherPlates}
+        </Grid2>
+        <Footer />
+      </Container>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header style={{ textAlign: 'center' }}>
+    <header>
       <h1>Weather App</h1>
     </header>
   );

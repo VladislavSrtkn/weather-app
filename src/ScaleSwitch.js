@@ -16,18 +16,18 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       '& .MuiSwitch-thumb:before': {},
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+        backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#73a1d1',
       },
     },
   },
   '& .MuiSwitch-thumb': {
-    backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
+    backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#03a9f4',
     width: 32,
     height: 32,
   },
   '& .MuiSwitch-track': {
     opacity: 1,
-    backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+    backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#73a1d1',
     borderRadius: 20 / 2,
   },
 }));
@@ -37,7 +37,7 @@ export default function ScaleSwitch({ scale, handlerChange }) {
     <FormControlLabel
       sx={{ paddingTop: '1.5rem' }}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={handlerChange} />}
-      label={scale.toUpperCase()}
+      label={<span style={{ fontWeight: 'bold' }}>{scale.toUpperCase()}</span>}
     />
   );
 }

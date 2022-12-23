@@ -18,8 +18,9 @@ export default function ForecastPlate({ weather, scale }) {
 
   const result = forecast.map((item) => (
     <div key={item.time}>
-      {item.time.slice(11, 13)} <br></br>
-      {item[`temp_${scale}`]}°
+      <span style={{ display: 'block', marginBottom: '1rem' }}>{item.time.slice(11, 13)}</span>{' '}
+      <br></br>
+      <span style={{ fontSize: '1.2rem' }}>{item[`temp_${scale}`]}°</span>
     </div>
   ));
 
