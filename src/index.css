@@ -9,9 +9,3 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
-.forecast-box {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
-}

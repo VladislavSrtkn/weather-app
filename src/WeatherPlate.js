@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
+
+import ForecastPlateDay from './ForecastPlateHourly';
+
 import { Button, Card } from '@mui/material';
-import ForecastPlate from './ForecastPlate';
 import IconButton from '@mui/material/IconButton';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ForecastPlateHourly from './ForecastPlateHourly';
+import ForecastPlateDaily from './ForecastPlateDaily';
 
 export default function WeatherPlate({ city, removeHandler, scale }) {
   const [isValid, setIsValid] = useState(false);
@@ -13,7 +17,7 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
 
   useEffect(() => {
     fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=c24794a3208345fb9e382502222112&q=${city}&aqi=no&days=2`
+      `https://api.weatherapi.com/v1/forecast.json?key=c24794a3208345fb9e382502222112&q=${city}&aqi=no&days=8`
     )
       .then((response) => response.json())
       .then((result) => setWeather({ ...result }))
@@ -82,16 +86,18 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
           </span>
         </div>
 
+        <ForecastPlateHourly weather={weather} scale={scale} />
+
         <Button
           variant='text'
           sx={{ marginY: '2rem', width: '100%' }}
           onClick={() => setForcastVisibility(!forecastVisibility)}
         >
-          Show 6-hours forecast
+          Show daily forecast
           {!forecastVisibility ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
         </Button>
 
-        {forecastVisibility && <ForecastPlate weather={weather} scale={scale} />}
+        {forecastVisibility && <ForecastPlateDaily weather={weather} scale={scale} />}
       </Card>
     )
   );
