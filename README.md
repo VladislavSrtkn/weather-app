@@ -1,6 +1,7 @@
 Weather App
 
 TODO :
-add forecast for 5-7 days
+design improves
+add content to daily forecast block
 
 location (?)

@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import ForecastPlateDay from './ForecastPlateHourly';
+import ForecastPlateDaily from './ForecastPlateDaily';
+import ForecastPlateHourly from './ForecastPlateHourly';
 
 import { Button, Card } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ForecastPlateHourly from './ForecastPlateHourly';
-import ForecastPlateDaily from './ForecastPlateDaily';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import CloudIcon from '@mui/icons-material/Cloud';
 
 export default function WeatherPlate({ city, removeHandler, scale }) {
   const [isValid, setIsValid] = useState(false);
@@ -43,11 +44,11 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
         }}
       >
         <IconButton
-          sx={{ position: 'absolute', right: 0, top: 0 }}
+          sx={{ position: 'absolute', right: 0, top: 0, color: '#ff29294a' }}
           aria-label='delete'
           onClick={() => removeHandler(city)}
         >
-          <HighlightOffIcon fontSize='large' />
+          <DeleteForeverIcon fontSize='large' />
         </IconButton>
 
         <h3>
@@ -61,19 +62,21 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
           °<img src={weather.current.condition.icon}></img>
         </h2>
 
+        <span>{weather.current.condition.text}</span>
+
         <p>
-          Min: {weather.forecast.forecastday[0].day[`mintemp_${scale}`]}°, Max:
-          {weather.forecast.forecastday[0].day[`maxtemp_${scale}`]}°
+          Max: {weather.forecast.forecastday[0].day[`maxtemp_${scale}`]}° min:
+          {weather.forecast.forecastday[0].day[`mintemp_${scale}`]}°
         </p>
 
         <div>
+          <ThermostatIcon
+            sx={{ marginBottom: '-0.3rem', marginRight: '0.5rem', color: '#2d7be5' }}
+          />
           <span style={{ paddingRight: '2rem', display: 'inline-block', marginBottom: '1rem' }}>
             Feels like {weather.current[`feelslike_${scale}`]}°
           </span>
-          <span style={{ paddingRight: '2rem', display: 'inline-block', marginBottom: '1rem' }}>
-            {' '}
-            {weather.current.condition.text}{' '}
-          </span>
+
           <span
             style={{
               paddingRight: '2rem',
@@ -82,6 +85,7 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
               whiteSpace: 'nowrap',
             }}
           >
+            <CloudIcon sx={{ marginBottom: '-0.3rem', marginRight: '0.5rem', color: '#2d7be5' }} />
             Сhance of rain: {weather.forecast.forecastday[0].day.daily_chance_of_rain}%
           </span>
         </div>

@@ -1,4 +1,5 @@
 import format from 'date-fns/format';
+import CloudIcon from '@mui/icons-material/Cloud';
 
 export default function ForecastPlateDaily({ weather, scale }) {
   const forecast = weather.forecast.forecastday.slice(1);
@@ -15,7 +16,10 @@ export default function ForecastPlateDaily({ weather, scale }) {
         </span>
         {item.day[`mintemp_${scale}`]}°
       </p>
-      <p>Chance of rain: {item.day.daily_chance_of_rain}%</p>
+      <p>
+        <CloudIcon sx={{ marginBottom: '-0.3rem', marginRight: '0.5rem', color: '#2d7be5' }} />{' '}
+        {item.day.daily_chance_of_rain}%
+      </p>
     </div>
   ));
 
