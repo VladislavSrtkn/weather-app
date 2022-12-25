@@ -47,7 +47,7 @@ function App() {
     setSearchValue(e.target.value);
 
     fetch(
-      `http://api.weatherapi.com/v1/search.json?key=c24794a3208345fb9e382502222112&q=${e.target.value}`
+      `https://api.weatherapi.com/v1/search.json?key=c24794a3208345fb9e382502222112&q=${e.target.value}`
     )
       .then((response) => response.json())
       .then((result) => setSearchResults([...result]))
