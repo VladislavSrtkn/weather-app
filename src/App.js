@@ -8,39 +8,28 @@ import { Container } from '@mui/system';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 function App() {
-  const [cities, setCities] = useState([
-    'auto:ip',
-    'Podgorica',
-    'Toronto',
-    'Saint-Petersburg',
-    'Belgrade',
-  ]);
+  const [city, setCity] = useState('auto:ip');
   const [scale, setScale] = useState('c');
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   function addCityBySubmit(e) {
     e.preventDefault();
-    const cityName = searchResults[0].name;
-    if (searchValue === '' || cities.includes(cityName)) {
+    if (searchValue === '') {
       return;
     }
-    setCities([cityName, ...cities]);
+
+    const cityName = searchResults[0].name;
+
+    setCity(cityName);
     setSearchValue('');
     setSearchResults([]);
   }
 
   function addCityByClick(cityName) {
-    if (cities.includes(cityName)) {
-      return;
-    }
-    setCities([cityName, ...cities]);
+    setCity(cityName);
     setSearchValue('');
     setSearchResults([]);
-  }
-
-  function removeCity(name) {
-    setCities(cities.filter((city) => city !== name));
   }
 
   function searchHandler(e) {
@@ -54,15 +43,11 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  const weatherPlates = cities.map((city) => (
-    <WeatherPlate key={city} city={city} scale={scale} removeHandler={removeCity} />
-  ));
-
   return (
     <>
       <Header />
       <Container>
-        <Grid2 container direction='row' alignItems='flex-start'>
+        <Grid2 container alignItems='flex-start'>
           <SearchForm
             value={searchValue}
             searchResults={searchResults}
@@ -72,8 +57,8 @@ function App() {
           />
           <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
         </Grid2>
-        <Grid2 container justifyContent='center'>
-          {weatherPlates}
+        <Grid2 container>
+          <WeatherPlate key={city} city={city} scale={scale} />
         </Grid2>
         <Footer />
       </Container>

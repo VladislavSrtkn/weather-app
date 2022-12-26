@@ -10,13 +10,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+body {
+  background-color: #53c7ef;
+  background-image: linear-gradient(to bottom, rgb(250 254 255), rgb(78 197 238));
+}
+
 header > h1 {
   margin: 0;
   padding: 1rem;
-  background-color: #2d7be5;
   color: #fff;
 }
 
 h3 {
-  color: #2d7be5;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: #fff;
+}
+
+a:hover {
+  color: rgb(9, 97, 169);
+  text-shadow: #53c7ef;
 }

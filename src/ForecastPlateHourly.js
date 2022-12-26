@@ -5,7 +5,7 @@ function getHourlyForecast(weather, hours) {
 
   let result;
 
-  result = currentDay.slice(currentHours + 1, currentHours + 1 + hours);
+  result = currentDay.slice(currentHours, currentHours + hours);
   if (result.length < hours) {
     const difference = hours - result.length;
     result = [...result, ...nextDay.slice(0, difference)];
@@ -14,23 +14,57 @@ function getHourlyForecast(weather, hours) {
 }
 
 export default function ForecastPlateHourly({ weather, scale }) {
-  const forecast = getHourlyForecast(weather, 6);
+  const forecast = getHourlyForecast(weather, 5);
 
-  const result = forecast.map((item) => (
+  const result = forecast.map((item, index) => (
     <div key={item.time}>
-      <span style={{ display: 'block', textAlign: 'center' }}>{item.time.slice(11, 13)}</span>{' '}
+      <span style={{ display: 'block', textAlign: 'center', fontWeight: 'bold' }}>
+        {index === 0 ? 'now ' : item.time.slice(11, 13)}
+      </span>
       <br />
-      <img style={{ width: '40px' }} src={item.condition.icon}></img>
+      <img alt={item.condition.text} style={{ width: '40px' }} src={item.condition.icon}></img>
       <br />
-      <span style={{ display: 'block', textAlign: 'center', fontSize: '1rem' }}>
+      <span style={{ display: 'block', textAlign: 'center', fontSize: '1rem', fontWeight: 'bold' }}>
         {Math.round(item[`temp_${scale}`])}°
       </span>
     </div>
   ));
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem' }}>
-      {result}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        width: '100%',
+        margin: '1rem',
+        borderRadius: 10,
+        color: '#fff',
+        backgroundImage: 'linear-gradient(to right, rgb(49, 155, 178), rgb(30 136 172))',
+      }}
+    >
+      <div
+        style={{
+          borderRadius: '10px 10px 0px 0px',
+          backgroundColor: 'rgb(55 68 86 / 39%)',
+          paddingLeft: '0.5rem',
+        }}
+      >
+        <h3>
+          {weather.location.name}, {weather.location.country} forecst
+        </h3>
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          margin: '1rem',
+        }}
+      >
+        {result}
+      </div>
     </div>
   );
 }
