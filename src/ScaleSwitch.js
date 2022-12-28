@@ -16,18 +16,18 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       '& .MuiSwitch-thumb:before': {},
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#158cb2',
+        backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#326fac',
       },
     },
   },
   '& .MuiSwitch-thumb': {
     width: 32,
     height: 32,
-    backgroundImage: 'linear-gradient(to right, rgb(43 150 176), rgb(112 202 230))',
+    backgroundImage: 'linear-gradient(to right, rgb(19, 79, 151), rgb(82, 148, 195))',
   },
   '& .MuiSwitch-track': {
     opacity: 1,
-    backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#158cb2',
+    backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#326fac',
     borderRadius: 20 / 2,
   },
 }));

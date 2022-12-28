@@ -7,7 +7,7 @@ export default function SearchForm({
   searchResults,
   clickHandler,
 }) {
-  const foundCities = searchResults.slice(0, 5).map((city) => (
+  const foundItems = searchResults.slice(0, 5).map((city) => (
     <ListItem disablePadding key={city.name} onClick={() => clickHandler(city.name)}>
       <ListItemButton>
         <ListItemText primary={city.name}></ListItemText>
@@ -25,7 +25,7 @@ export default function SearchForm({
         value={value}
         onChange={(e) => changeHandler(e)}
       ></TextField>
-      <List>{foundCities}</List>
+      <List>{foundItems}</List>
     </form>
   );
 }

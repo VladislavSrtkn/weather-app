@@ -1,7 +1,7 @@
-function getHourlyForecast(weather, hours) {
-  const currentHours = new Date(weather.location.localtime).getHours();
-  const currentDay = weather.forecast.forecastday[0].hour;
-  const nextDay = weather.forecast.forecastday[1].hour;
+function getHourlyForecast(time, forecastArray, hours) {
+  const currentHours = new Date(time).getHours();
+  const currentDay = forecastArray[0].hour;
+  const nextDay = forecastArray[1].hour;
 
   let result;
 
@@ -13,8 +13,8 @@ function getHourlyForecast(weather, hours) {
   return result;
 }
 
-export default function ForecastPlateHourly({ weather, scale }) {
-  const forecast = getHourlyForecast(weather, 5);
+export default function ForecastHourly({ time, forecastArray, city, country, scale }) {
+  const forecast = getHourlyForecast(time, forecastArray, 5);
 
   const result = forecast.map((item, index) => (
     <div key={item.time}>
@@ -40,7 +40,7 @@ export default function ForecastPlateHourly({ weather, scale }) {
         margin: '1rem',
         borderRadius: 10,
         color: '#fff',
-        backgroundImage: 'linear-gradient(to right, rgb(49, 155, 178), rgb(30 136 172))',
+        backgroundImage: 'linear-gradient(to right, rgb(19, 79, 151), rgb(82, 148, 195))',
       }}
     >
       <div
@@ -51,7 +51,7 @@ export default function ForecastPlateHourly({ weather, scale }) {
         }}
       >
         <h3>
-          {weather.location.name}, {weather.location.country} forecst
+          {city}, {country} forecast
         </h3>
       </div>
 

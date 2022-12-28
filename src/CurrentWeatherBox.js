@@ -1,6 +1,6 @@
 import format from 'date-fns/format';
 
-export default function MainWeatherPlate({
+export default function CurrentWeatherBox({
   city,
   country,
   time,
@@ -20,7 +20,7 @@ export default function MainWeatherPlate({
         margin: '1rem',
         position: 'relative',
         borderRadius: 10,
-        backgroundImage: 'linear-gradient(to right, #00b4db, #0083b0)',
+        backgroundImage: 'linear-gradient(to right, rgb(19, 79, 151), rgb(82, 148, 195))',
       }}
     >
       <div
@@ -39,12 +39,12 @@ export default function MainWeatherPlate({
         style={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           padding: '0.5rem',
         }}
       >
         <div>
-          <h2 style={{ color: '#fff', fontSize: '4rem', margin: 0, padding: '0.5rem' }}>
+          <h2 style={{ color: '#fff', fontSize: '3rem', margin: 0, padding: '0.5rem' }}>
             {Math.round(temp)}°
           </h2>
 
@@ -57,7 +57,7 @@ export default function MainWeatherPlate({
           </p>
         </div>
         <div>
-          <img style={{ width: '130px' }} src={imgSrc} alt={condition}></img>
+          <img style={{ width: '80px' }} src={imgSrc} alt={condition}></img>
         </div>
       </div>
     </div>

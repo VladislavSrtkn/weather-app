@@ -1,17 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchForm from './SearchForm';
 import Header from './Header';
 import Footer from './Footer';
-import WeatherPlate from './WeatherPlate';
+import WeatherContentBox from './WeatherContentBox';
 import ScaleSwitch from './ScaleSwitch';
 import { Container } from '@mui/system';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 function App() {
-  const [city, setCity] = useState('auto:ip');
+  const [city, setCity] = useState(null);
   const [scale, setScale] = useState('c');
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => setCity(position.coords.latitude + ' ' + position.coords.longitude),
+      () => setCity('auto:ip')
+    );
+  }, []);
 
   function addCityBySubmit(e) {
     e.preventDefault();
@@ -46,7 +53,7 @@ function App() {
   return (
     <>
       <Header />
-      <Container>
+      <Container sx={{ minHeight: '100vh' }}>
         <Grid2 container alignItems='flex-start'>
           <SearchForm
             value={searchValue}
@@ -58,10 +65,10 @@ function App() {
           <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
         </Grid2>
         <Grid2 container>
-          <WeatherPlate key={city} city={city} scale={scale} />
+          {city && <WeatherContentBox key={city} city={city} scale={scale} />}
         </Grid2>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }

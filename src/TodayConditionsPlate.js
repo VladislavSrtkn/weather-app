@@ -35,7 +35,7 @@ export default function TodayCondtionsPlate({ weather, scale }) {
         margin: '1rem',
         borderRadius: 10,
         color: '#fff',
-        backgroundImage: 'linear-gradient(to right, rgb(49, 155, 178), rgb(28 139 178))',
+        backgroundImage: 'linear-gradient(to right, rgb(19, 79, 151), rgb(82, 148, 195))',
       }}
     >
       <div

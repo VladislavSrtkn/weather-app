@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import ForecastPlateHourly from './ForecastPlateHourly';
-import MainWeatherPlate from './MainWeatherPlate';
+import ForecastHourly from './ForecastHourly';
+import CurrentWeatherBox from './CurrentWeatherBox';
 import TodayCondtionsPlate from './TodayConditionsPlate';
 
-export default function WeatherPlate({ city, removeHandler, scale }) {
+export default function WeatherContentBox({ city, scale }) {
   const [isValid, setIsValid] = useState(false);
   const [weather, setWeather] = useState(null);
 
@@ -24,7 +24,7 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
   return (
     isValid && (
       <>
-        <MainWeatherPlate
+        <CurrentWeatherBox
           city={weather.location.name}
           country={weather.location.country}
           time={weather.location.localtime}
@@ -34,7 +34,13 @@ export default function WeatherPlate({ city, removeHandler, scale }) {
           min={weather.forecast.forecastday[0].day[`mintemp_${scale}`]}
           imgSrc={weather.current.condition.icon}
         />
-        <ForecastPlateHourly weather={weather} scale={scale} />
+        <ForecastHourly
+          time={weather.location.localtime}
+          forecastArray={weather.forecast.forecastday}
+          city={weather.location.name}
+          country={weather.location.country}
+          scale={scale}
+        />
 
         <TodayCondtionsPlate weather={weather} scale={scale} />
       </>
