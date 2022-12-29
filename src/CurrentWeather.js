@@ -1,15 +1,6 @@
 import format from 'date-fns/format';
 
-export default function CurrentWeatherBox({
-  city,
-  country,
-  time,
-  temp,
-  condition,
-  max,
-  min,
-  imgSrc,
-}) {
+export default function CurrentWeather({ city, country, time, temp, condition, max, min, imgSrc }) {
   return (
     <div
       style={{

@@ -8,23 +8,18 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import AirIcon from '@mui/icons-material/Air';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 
-export default function TodayCondtionsPlate({ weather, scale }) {
-  const wind =
-    scale === 'c'
-      ? `${weather.forecast.forecastday[0].day.maxwind_kph} km/h`
-      : `${weather.forecast.forecastday[0].day.maxwind_mph} m/h`;
-
-  const visibility =
-    scale === 'c'
-      ? `${weather.forecast.forecastday[0].day.avgvis_km} km`
-      : `${weather.forecast.forecastday[0].day.avgvis_miles} m`;
-
-  const humidity = weather.forecast.forecastday[0].day.avghumidity + '%';
-
-  const indexUV = Math.round(weather.forecast.forecastday[0].day.uv) + ' of 10';
-
-  const moonPhase = weather.forecast.forecastday[0].astro.moon_phase;
-
+export default function TodayCondtions({
+  city,
+  country,
+  feelsLike,
+  sunrise,
+  sunset,
+  wind,
+  visibility,
+  humidity,
+  indexUV,
+  moonPhase,
+}) {
   return (
     <div
       style={{
@@ -46,15 +41,13 @@ export default function TodayCondtionsPlate({ weather, scale }) {
         }}
       >
         <h3>
-          Weather today {weather.location.name}, {weather.location.country}
+          Weather today {city}, {country}
         </h3>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
         <div style={{ fontWeight: 'bold' }}>
-          <span style={{ fontSize: '2rem' }}>
-            {Math.round(weather.current[`feelslike_${scale}`])}°
-          </span>
+          <span style={{ fontSize: '2rem' }}>{Math.round(feelsLike)}°</span>
           <br />
           <span style={{ fontSize: '1.1rem' }}>Feels like</span>
         </div>
@@ -70,9 +63,8 @@ export default function TodayCondtionsPlate({ weather, scale }) {
           <WbTwilightIcon fontSize='large' />
           <div>
             <FileUploadIcon style={{ marginBottom: '-5px' }} />
-            {weather.forecast.forecastday[0].astro.sunrise}
-            <FileDownloadIcon style={{ marginBottom: '-5px' }} />{' '}
-            {weather.forecast.forecastday[0].astro.sunset}
+            {sunrise}
+            <FileDownloadIcon style={{ marginBottom: '-5px' }} /> {sunset}
           </div>
         </div>
       </div>

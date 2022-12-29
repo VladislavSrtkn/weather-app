@@ -1,49 +1,96 @@
 import { useEffect, useState } from 'react';
 
 import ForecastHourly from './ForecastHourly';
-import CurrentWeatherBox from './CurrentWeatherBox';
-import TodayCondtionsPlate from './TodayConditionsPlate';
+import CurrentWeather from './CurrentWeather';
+import TodayCondtions from './TodayConditions';
+
+import getHourlyForecast from './getForecast';
 
 export default function WeatherContentBox({ city, scale }) {
-  const [isValid, setIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
     fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=c24794a3208345fb9e382502222112&q=${city}&aqi=no&days=8`
+      `https://api.weatherapi.com/v1/forecast.json?key=c24794a3208345fb9e382502222112&q=${city}&aqi=no&days=3`
     )
       .then((response) => response.json())
       .then((result) => setWeather({ ...result }))
-      .then(() => setIsValid(true))
+      .then(() => {
+        setIsLoading(false);
+        setIsReady(true);
+      })
       .catch((err) => {
-        setIsValid(false);
+        setIsError(err);
         console.log(err);
+        console.log(weather);
       });
   }, []);
 
-  return (
-    isValid && (
-      <>
-        <CurrentWeatherBox
-          city={weather.location.name}
-          country={weather.location.country}
-          time={weather.location.localtime}
-          temp={weather.current[`temp_${scale}`]}
-          condition={weather.current.condition.text}
-          max={weather.forecast.forecastday[0].day[`maxtemp_${scale}`]}
-          min={weather.forecast.forecastday[0].day[`mintemp_${scale}`]}
-          imgSrc={weather.current.condition.icon}
-        />
-        <ForecastHourly
-          time={weather.location.localtime}
-          forecastArray={weather.forecast.forecastday}
-          city={weather.location.name}
-          country={weather.location.country}
-          scale={scale}
-        />
+  if (isLoading) {
+    return <span>Loading</span>;
+  }
 
-        <TodayCondtionsPlate weather={weather} scale={scale} />
+  if (isError) {
+    return <span>Error</span>;
+  }
+
+  if (isReady) {
+    const city = weather.location.name;
+    const country = weather.location.country;
+    const time = weather.location.localtime;
+    const temp = weather.current[`temp_${scale}`];
+    const condition = weather.current.condition.text;
+    const maxTemp = weather.forecast.forecastday[0].day[`maxtemp_${scale}`];
+    const minTemp = weather.forecast.forecastday[0].day[`mintemp_${scale}`];
+    const imageSource = weather.current.condition.icon;
+    const forecast = getHourlyForecast(time, weather.forecast.forecastday, 5);
+    const feelsLike = weather.current[`feelslike_${scale}`];
+    const sunrise = weather.forecast.forecastday[0].astro.sunrise;
+    const sunset = weather.forecast.forecastday[0].astro.sunset;
+    const wind =
+      scale === 'c'
+        ? `${weather.forecast.forecastday[0].day.maxwind_kph} km/h`
+        : `${weather.forecast.forecastday[0].day.maxwind_mph} m/h`;
+    const visibility =
+      scale === 'c'
+        ? `${weather.forecast.forecastday[0].day.avgvis_km} km`
+        : `${weather.forecast.forecastday[0].day.avgvis_miles} m`;
+    const humidity = weather.forecast.forecastday[0].day.avghumidity + '%';
+    const indexUV = Math.round(weather.forecast.forecastday[0].day.uv) + ' of 10';
+    const moonPhase = weather.forecast.forecastday[0].astro.moon_phase;
+
+    return (
+      <>
+        <CurrentWeather
+          city={city}
+          country={country}
+          time={time}
+          temp={temp}
+          condition={condition}
+          max={maxTemp}
+          min={minTemp}
+          imgSrc={imageSource}
+        />
+        <ForecastHourly forecastArray={forecast} city={city} country={country} scale={scale} />
+
+        <TodayCondtions
+          city={city}
+          country={country}
+          feelsLike={feelsLike}
+          sunrise={sunrise}
+          sunset={sunset}
+          wind={wind}
+          visibility={visibility}
+          weather={weather}
+          scale={scale}
+          humidity={humidity}
+          indexUV={indexUV}
+          moonPhase={moonPhase}
+        />
       </>
-    )
-  );
+    );
+  }
 }

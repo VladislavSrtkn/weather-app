@@ -1,22 +1,5 @@
-function getHourlyForecast(time, forecastArray, hours) {
-  const currentHours = new Date(time).getHours();
-  const currentDay = forecastArray[0].hour;
-  const nextDay = forecastArray[1].hour;
-
-  let result;
-
-  result = currentDay.slice(currentHours, currentHours + hours);
-  if (result.length < hours) {
-    const difference = hours - result.length;
-    result = [...result, ...nextDay.slice(0, difference)];
-  }
-  return result;
-}
-
-export default function ForecastHourly({ time, forecastArray, city, country, scale }) {
-  const forecast = getHourlyForecast(time, forecastArray, 5);
-
-  const result = forecast.map((item, index) => (
+export default function ForecastHourly({ forecastArray, city, country, scale }) {
+  const result = forecastArray.map((item, index) => (
     <div key={item.time}>
       <span style={{ display: 'block', textAlign: 'center', fontWeight: 'bold' }}>
         {index === 0 ? 'now ' : item.time.slice(11, 13)}

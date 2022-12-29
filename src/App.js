@@ -4,7 +4,6 @@ import Header from './Header';
 import Footer from './Footer';
 import WeatherContentBox from './WeatherContentBox';
 import ScaleSwitch from './ScaleSwitch';
-import { Container } from '@mui/system';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 function App() {
@@ -53,8 +52,10 @@ function App() {
   return (
     <>
       <Header />
-      <Container sx={{ minHeight: '100vh' }}>
-        <Grid2 container alignItems='flex-start'>
+      <div
+        style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
           <SearchForm
             value={searchValue}
             searchResults={searchResults}
@@ -63,11 +64,11 @@ function App() {
             clickHandler={addCityByClick}
           />
           <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
-        </Grid2>
+        </div>
         <Grid2 container>
           {city && <WeatherContentBox key={city} city={city} scale={scale} />}
         </Grid2>
-      </Container>
+      </div>
       <Footer />
     </>
   );
