@@ -1,5 +1,3 @@
-import format from 'date-fns/format';
-
 export default function CurrentWeather({ city, country, time, temp, condition, max, min, imgSrc }) {
   return (
     <div
@@ -22,7 +20,7 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
         }}
       >
         <h3>
-          {city}, {country} {format(new Date(time), 'k:mm')}
+          {city}, {country} {time}
         </h3>
       </div>
 

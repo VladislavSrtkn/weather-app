@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import format from 'date-fns/format';
+
 import ForecastHourly from './ForecastHourly';
 import CurrentWeather from './CurrentWeather';
 import TodayCondtions from './TodayConditions';
@@ -40,13 +42,13 @@ export default function WeatherContentBox({ city, scale }) {
   if (isReady) {
     const city = weather.location.name;
     const country = weather.location.country;
-    const time = weather.location.localtime;
+    const time = format(new Date(weather.location.localtime), 'kk:mm');
     const temp = weather.current[`temp_${scale}`];
     const condition = weather.current.condition.text;
     const maxTemp = weather.forecast.forecastday[0].day[`maxtemp_${scale}`];
     const minTemp = weather.forecast.forecastday[0].day[`mintemp_${scale}`];
     const imageSource = weather.current.condition.icon;
-    const forecast = getHourlyForecast(time, weather.forecast.forecastday, 5);
+    const forecast = getHourlyForecast(weather.location.localtime, weather.forecast.forecastday, 5);
     const feelsLike = weather.current[`feelslike_${scale}`];
     const sunrise = weather.forecast.forecastday[0].astro.sunrise;
     const sunset = weather.forecast.forecastday[0].astro.sunset;
