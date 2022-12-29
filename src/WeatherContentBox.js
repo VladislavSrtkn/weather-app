@@ -5,6 +5,7 @@ import CurrentWeather from './CurrentWeather';
 import TodayCondtions from './TodayConditions';
 
 import getHourlyForecast from './getForecast';
+import SceletonContent from './SceletonContent';
 
 export default function WeatherContentBox({ city, scale }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,7 @@ export default function WeatherContentBox({ city, scale }) {
   }, []);
 
   if (isLoading) {
-    return <span>Loading</span>;
+    return <SceletonContent />;
   }
 
   if (isError) {

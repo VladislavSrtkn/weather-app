@@ -5,6 +5,7 @@ import Footer from './Footer';
 import WeatherContentBox from './WeatherContentBox';
 import ScaleSwitch from './ScaleSwitch';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import SceletonContent from './SceletonContent';
 
 function App() {
   const [city, setCity] = useState(null);
@@ -66,7 +67,9 @@ function App() {
           <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
         </div>
         <Grid2 container>
-          {city && <WeatherContentBox key={city} city={city} scale={scale} />}
+          {(city && <WeatherContentBox key={city} city={city} scale={scale} />) || (
+            <SceletonContent />
+          )}
         </Grid2>
       </div>
       <Footer />

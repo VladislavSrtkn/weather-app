@@ -2,4 +2,4 @@ Weather App
 
 TODO :
 
-Изменить отображение загрузки и ошибки
+Add error show container
