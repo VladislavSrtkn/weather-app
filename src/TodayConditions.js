@@ -61,7 +61,7 @@ export default function TodayCondtions({
           }}
         >
           <WbTwilightIcon fontSize='large' />
-          <div>
+          <div style={{ textAlign: 'center' }}>
             <FileUploadIcon style={{ marginBottom: '-5px' }} />
             {sunrise}
             <FileDownloadIcon style={{ marginBottom: '-5px' }} /> {sunset}

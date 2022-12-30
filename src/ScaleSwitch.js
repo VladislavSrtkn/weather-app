@@ -35,7 +35,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export default function ScaleSwitch({ scale, handlerChange }) {
   return (
     <FormControlLabel
-      sx={{ paddingTop: '1.5rem' }}
+      sx={{ marginTop: '1.2rem' }}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={handlerChange} />}
       label={<span style={{ fontWeight: 'bold', color: '#165361' }}>{scale.toUpperCase()}</span>}
     />

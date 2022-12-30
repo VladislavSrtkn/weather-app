@@ -7,6 +7,8 @@ import ScaleSwitch from './ScaleSwitch';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import SceletonContent from './SceletonContent';
 import ErrorBox from './ErrorBox';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { IconButton } from '@mui/material';
 
 function App() {
   const [city, setCity] = useState(null);
@@ -15,12 +17,15 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchError, setSearcError] = useState(false);
 
-  useEffect(() => {
+  useEffect(setCurrentLocation, []);
+
+  function setCurrentLocation() {
+    setCity(null);
     navigator.geolocation.getCurrentPosition(
       (position) => setCity(position.coords.latitude + ' ' + position.coords.longitude),
       () => setCity('auto:ip')
     );
-  }, []);
+  }
 
   function addCityBySubmit(e) {
     e.preventDefault();
@@ -67,6 +72,14 @@ function App() {
         style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
       >
         <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+          <IconButton
+            aria-label='Switch to current location'
+            onClick={() => setCurrentLocation()}
+            sx={{ marginTop: '1.2rem' }}
+          >
+            <LocationOnIcon sx={{ fontSize: '2rem' }} />
+          </IconButton>
+
           <SearchForm
             value={searchValue}
             searchResults={searchResults}
