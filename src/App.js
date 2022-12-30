@@ -17,7 +17,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchError, setSearcError] = useState(false);
 
-  useEffect(setCurrentLocation, []);
+  useEffect(() => setCurrentLocation(), []);
 
   function setCurrentLocation() {
     setCity(null);
@@ -71,15 +71,21 @@ function App() {
       <div
         style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
       >
-        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+          }}
+        >
           <IconButton
             aria-label='Switch to current location'
             onClick={() => setCurrentLocation()}
-            sx={{ marginTop: '1.2rem' }}
+            sx={{ marginTop: '1.2rem', color: '#2469ce' }}
           >
             <LocationOnIcon sx={{ fontSize: '2rem' }} />
           </IconButton>
-
           <SearchForm
             value={searchValue}
             searchResults={searchResults}

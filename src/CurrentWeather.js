@@ -8,14 +8,15 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
         width: '100%',
         margin: '1rem',
         position: 'relative',
-        borderRadius: 10,
-        backgroundImage: 'linear-gradient(to right, rgb(19, 79, 151), rgb(82, 148, 195))',
+        borderRadius: '10px',
+        backgroundColor: '#2469ce',
+        boxShadow: '#cdcdcd -4px 2px 3px 0px',
       }}
     >
       <div
         style={{
           borderRadius: '10px 10px 0px 0px',
-          backgroundColor: 'rgb(55 68 86 / 39%)',
+          backgroundColor: '#fff',
           paddingLeft: '0.5rem',
         }}
       >
@@ -28,7 +29,7 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
         style={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'space-between',
           padding: '0.5rem',
         }}
       >

@@ -28,15 +28,16 @@ export default function TodayCondtions({
         justifyContent: 'space-between',
         width: '100%',
         margin: '1rem',
-        borderRadius: 10,
+        borderRadius: '10px',
         color: '#fff',
-        backgroundImage: 'linear-gradient(to right, rgb(19, 79, 151), rgb(82, 148, 195))',
+        backgroundColor: '#2469ce',
+        boxShadow: 'rgb(205 205 205) -4px 2px 3px 0px',
       }}
     >
       <div
         style={{
           borderRadius: '10px 10px 0px 0px',
-          backgroundColor: 'rgb(55 68 86 / 39%)',
+          backgroundColor: '#fff',
           paddingLeft: '0.5rem',
         }}
       >
