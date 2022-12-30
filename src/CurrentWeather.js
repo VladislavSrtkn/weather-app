@@ -37,9 +37,7 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
             {Math.round(temp)}°
           </h2>
 
-          <p
-            style={{ color: '#fff', fontWeight: 'bold', fontSize: '1.5rem', paddingLeft: '0.8rem' }}
-          >
+          <p style={{ color: '#fff', fontSize: '1.5rem', paddingLeft: '0.8rem' }}>
             {condition} <br />
             <span>Max: {Math.round(max)}°</span>{' '}
             <span style={{ whiteSpace: 'nowrap' }}>min: {Math.round(min)}°</span>

@@ -6,12 +6,14 @@ import WeatherContentBox from './WeatherContentBox';
 import ScaleSwitch from './ScaleSwitch';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import SceletonContent from './SceletonContent';
+import ErrorBox from './ErrorBox';
 
 function App() {
   const [city, setCity] = useState(null);
   const [scale, setScale] = useState('c');
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [searchError, setSearcError] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -45,9 +47,17 @@ function App() {
     fetch(
       `https://api.weatherapi.com/v1/search.json?key=c24794a3208345fb9e382502222112&q=${e.target.value}`
     )
-      .then((response) => response.json())
-      .then((result) => setSearchResults([...result]))
-      .catch((error) => console.log(error));
+      .then((response) => {
+        if (response.status === 200) {
+          setSearcError(false);
+          return response.json().then((result) => setSearchResults([...result]));
+        } else {
+          setSearcError('Search failed with error ' + response.status);
+        }
+      })
+      .catch((err) => {
+        setSearcError('Search failed with error ' + err.message);
+      });
   }
 
   return (
@@ -66,6 +76,7 @@ function App() {
           />
           <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
         </div>
+        {searchError && <ErrorBox errorText={searchError} />}
         <Grid2 container>
           {(city && <WeatherContentBox key={city} city={city} scale={scale} />) || (
             <SceletonContent />

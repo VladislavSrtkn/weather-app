@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import ForecastHourly from './ForecastHourly';
 import CurrentWeather from './CurrentWeather';
 import TodayCondtions from './TodayConditions';
+import ErrorBox from './ErrorBox';
 
 import getHourlyForecast from './getForecast';
 import SceletonContent from './SceletonContent';
@@ -17,25 +18,37 @@ export default function WeatherContentBox({ city, scale }) {
     fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=c24794a3208345fb9e382502222112&q=${city}&aqi=no&days=3`
     )
-      .then((response) => response.json())
-      .then((result) => setWeather({ ...result }))
-      .then(() => {
-        setIsLoading(false);
-        setIsReady(true);
+      .then((response) => {
+        if (response.status === 200) {
+          return response
+            .json()
+            .then((result) => setWeather({ ...result }))
+            .then(() => {
+              setIsLoading(false);
+              setIsReady(true);
+            });
+        } else {
+          setIsLoading(false);
+          setIsError(response.status);
+          console.log(
+            'API request failed, code: ' +
+              response.status +
+              '. About type of error: https://www.weatherapi.com/docs/'
+          );
+        }
       })
       .catch((err) => {
-        setIsError(err);
-        console.log(err);
-        console.log(weather);
+        setIsLoading(false);
+        setIsError(err.message);
       });
-  }, []);
+  }, [city]);
 
   if (isLoading) {
     return <SceletonContent />;
   }
 
   if (isError) {
-    return <span>Error</span>;
+    return <ErrorBox errorText={isError} />;
   }
 
   if (isReady) {

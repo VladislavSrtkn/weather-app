@@ -2,4 +2,6 @@ Weather App
 
 TODO :
 
-Add error show container
+Добавить кнопку возврата к текущей локации
+
+Дизайн
