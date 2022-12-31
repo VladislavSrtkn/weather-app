@@ -21,6 +21,8 @@ function App() {
 
   function setCurrentLocation() {
     setCity(null);
+    setSearchValue('');
+    setSearchResults([]);
     navigator.geolocation.getCurrentPosition(
       (position) => setCity(position.coords.latitude + ' ' + position.coords.longitude),
       () => setCity('auto:ip')
@@ -68,39 +70,41 @@ function App() {
   return (
     <>
       <Header />
-      <div
-        style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
-      >
+      <div className='shadowBox'>
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            paddingTop: '1rem',
-            paddingBottom: '1rem',
-          }}
+          style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
         >
-          <IconButton
-            aria-label='Switch to current location'
-            onClick={() => setCurrentLocation()}
-            sx={{ marginTop: '1.2rem', color: '#2469ce' }}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              paddingTop: '1rem',
+              paddingBottom: '1rem',
+            }}
           >
-            <LocationOnIcon sx={{ fontSize: '2rem' }} />
-          </IconButton>
-          <SearchForm
-            value={searchValue}
-            searchResults={searchResults}
-            changeHandler={searchHandler}
-            submitHandler={addCityBySubmit}
-            clickHandler={addCityByClick}
-          />
-          <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
+            <IconButton
+              aria-label='Switch to current location'
+              onClick={() => setCurrentLocation()}
+              sx={{ marginTop: '1.2rem', color: '#fff' }}
+            >
+              <LocationOnIcon sx={{ fontSize: '2rem' }} />
+            </IconButton>
+            <SearchForm
+              value={searchValue}
+              searchResults={searchResults}
+              changeHandler={searchHandler}
+              submitHandler={addCityBySubmit}
+              clickHandler={addCityByClick}
+            />
+            <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
+          </div>
+          {searchError && <ErrorBox errorText={searchError} />}
+          <Grid2 container>
+            {(city && <WeatherContentBox key={city} city={city} scale={scale} />) || (
+              <SceletonContent />
+            )}
+          </Grid2>
         </div>
-        {searchError && <ErrorBox errorText={searchError} />}
-        <Grid2 container>
-          {(city && <WeatherContentBox key={city} city={city} scale={scale} />) || (
-            <SceletonContent />
-          )}
-        </Grid2>
       </div>
       <Footer />
     </>

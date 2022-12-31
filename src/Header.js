@@ -5,7 +5,7 @@ export default function Header() {
     <header>
       <h1
         style={{
-          backgroundColor: '#153d77',
+          backgroundColor: '#1d76f687',
           fontSize: '1.5rem',
         }}
       >

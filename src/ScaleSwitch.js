@@ -23,7 +23,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-thumb': {
     width: 32,
     height: 32,
-    backgroundColor: '#2469ce',
+    backgroundColor: '#fff',
   },
   '& .MuiSwitch-track': {
     opacity: 1,

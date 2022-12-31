@@ -1,4 +1,6 @@
 import ConditionString from './ConditionString';
+import BoxHeader from './BoxHeader';
+import BoxBody from './BoxBody';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
@@ -21,30 +23,8 @@ export default function TodayCondtions({
   moonPhase,
 }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        width: '100%',
-        margin: '1rem',
-        borderRadius: '10px',
-        color: '#fff',
-        backgroundColor: '#2469ce',
-        boxShadow: 'rgb(205 205 205) -4px 2px 3px 0px',
-      }}
-    >
-      <div
-        style={{
-          borderRadius: '10px 10px 0px 0px',
-          backgroundColor: '#fff',
-          paddingLeft: '0.5rem',
-        }}
-      >
-        <h3>
-          Weather today {city}, {country}
-        </h3>
-      </div>
+    <BoxBody>
+      <BoxHeader text={`Weather today ${city}, ${country}`} />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
         <div style={{ fontWeight: 'bold' }}>
@@ -95,6 +75,6 @@ export default function TodayCondtions({
         text='Moon phase'
         value={moonPhase}
       />
-    </div>
+    </BoxBody>
   );
 }

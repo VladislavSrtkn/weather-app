@@ -60,7 +60,11 @@ export default function WeatherContentBox({ city, scale }) {
     const maxTemp = weather.forecast.forecastday[0].day[`maxtemp_${scale}`];
     const minTemp = weather.forecast.forecastday[0].day[`mintemp_${scale}`];
     const imageSource = weather.current.condition.icon;
-    const forecast = getHourlyForecast(weather.location.localtime, weather.forecast.forecastday, 5);
+    const formattedTime =
+      weather.location.localtime.length === 16
+        ? weather.location.localtime
+        : weather.location.localtime.slice(0, 11) + '0' + weather.location.localtime.slice(11);
+    const forecast = getHourlyForecast(formattedTime, weather.forecast.forecastday, 5);
     const feelsLike = weather.current[`feelslike_${scale}`];
     const sunrise = weather.forecast.forecastday[0].astro.sunrise;
     const sunset = weather.forecast.forecastday[0].astro.sunset;

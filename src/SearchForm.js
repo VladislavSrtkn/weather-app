@@ -20,7 +20,7 @@ export default function SearchForm({
       <TextField
         sx={{ width: '100%' }}
         size='normal'
-        variant='standard'
+        variant='outlined'
         label='Enter city name'
         value={value}
         onChange={(e) => changeHandler(e)}
