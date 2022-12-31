@@ -70,41 +70,39 @@ function App() {
   return (
     <>
       <Header />
-      <div className='shadowBox'>
+      <div
+        style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
+      >
         <div
-          style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+          }}
         >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              paddingTop: '1rem',
-              paddingBottom: '1rem',
-            }}
+          <IconButton
+            aria-label='Switch to current location'
+            onClick={() => setCurrentLocation()}
+            sx={{ marginTop: '1.2rem', color: '#fff' }}
           >
-            <IconButton
-              aria-label='Switch to current location'
-              onClick={() => setCurrentLocation()}
-              sx={{ marginTop: '1.2rem', color: '#fff' }}
-            >
-              <LocationOnIcon sx={{ fontSize: '2rem' }} />
-            </IconButton>
-            <SearchForm
-              value={searchValue}
-              searchResults={searchResults}
-              changeHandler={searchHandler}
-              submitHandler={addCityBySubmit}
-              clickHandler={addCityByClick}
-            />
-            <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
-          </div>
-          {searchError && <ErrorBox errorText={searchError} />}
-          <Grid2 container>
-            {(city && <WeatherContentBox key={city} city={city} scale={scale} />) || (
-              <SceletonContent />
-            )}
-          </Grid2>
+            <LocationOnIcon sx={{ fontSize: '2rem' }} />
+          </IconButton>
+          <SearchForm
+            value={searchValue}
+            searchResults={searchResults}
+            changeHandler={searchHandler}
+            submitHandler={addCityBySubmit}
+            clickHandler={addCityByClick}
+          />
+          <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
         </div>
+        {searchError && <ErrorBox errorText={searchError} />}
+        <Grid2 container>
+          {(city && <WeatherContentBox key={city} city={city} scale={scale} />) || (
+            <SceletonContent />
+          )}
+        </Grid2>
       </div>
       <Footer />
     </>

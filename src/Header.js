@@ -5,8 +5,9 @@ export default function Header() {
     <header>
       <h1
         style={{
-          backgroundColor: '#1d76f687',
           fontSize: '1.5rem',
+          backgroundColor: '#7b2049',
+          boxShadow: '#fff 0px 2px 1px 0px',
         }}
       >
         Weather App

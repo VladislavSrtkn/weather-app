@@ -11,8 +11,7 @@ export default function BoxBody({ children }) {
         marginBottom: '2rem',
         borderRadius: '10px',
         color: '#fff',
-        backgroundColor: '#2469ce',
-        boxShadow: 'rgb(205 205 205) -4px 2px 3px 0px',
+        backgroundColor: '#1e2762',
       }}
     >
       {children}
