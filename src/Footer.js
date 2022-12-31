@@ -5,7 +5,7 @@ export default function Footer() {
         style={{
           margin: 0,
           padding: '0.7rem',
-          backgroundColor: '#1d76f687',
+          backgroundColor: '#eea47f',
         }}
       >
         Made by{' '}

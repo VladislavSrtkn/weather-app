@@ -3,7 +3,7 @@ export default function BoxHeader({ text }) {
     <div
       style={{
         borderRadius: '10px 10px 0px 0px',
-        backgroundColor: '#fff',
+        backgroundColor: '#eea47f',
         paddingLeft: '0.5rem',
       }}
     >

@@ -5,21 +5,21 @@ export default function SceletonContent() {
     <>
       <Skeleton
         variant='rounded'
-        sx={{ margin: '1rem', backgroundColor: '#2469ce75', borderRadius: '10px' }}
+        sx={{ margin: '2rem', backgroundColor: '#1e2762c7', borderRadius: '10px' }}
         width='100%'
-        height={251}
+        height={227}
       />
       <Skeleton
         variant='rounded'
-        sx={{ margin: '1rem', backgroundColor: '#2469ce75', borderRadius: '10px' }}
+        sx={{ margin: '2rem', backgroundColor: '#1e2762c7', borderRadius: '10px' }}
         width='100%'
-        height={191}
+        height={194}
       />
       <Skeleton
         variant='rounded'
-        sx={{ margin: '1rem', backgroundColor: '#2469ce75', borderRadius: '10px' }}
+        sx={{ margin: '2rem', backgroundColor: '#1e2762c7', borderRadius: '10px' }}
         width='100%'
-        height={422}
+        height={426}
       />
     </>
   );
