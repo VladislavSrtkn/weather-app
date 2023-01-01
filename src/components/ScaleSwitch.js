@@ -11,7 +11,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     padding: 0,
     transform: 'translateX(6px)',
     '&.Mui-checked': {
-      color: '#fff',
       transform: 'translateX(22px)',
       '& .MuiSwitch-thumb:before': {},
       '& + .MuiSwitch-track': {
@@ -37,7 +36,7 @@ export default function ScaleSwitch({ scale, handlerChange }) {
     <FormControlLabel
       sx={{ marginTop: '1.2rem' }}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={handlerChange} />}
-      label={<span style={{ fontWeight: 'bold', color: '#153d77' }}>{scale.toUpperCase()}</span>}
+      label={<span style={{ fontWeight: 'bold' }}>{scale.toUpperCase()}</span>}
     />
   );
 }

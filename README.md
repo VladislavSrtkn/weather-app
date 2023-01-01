@@ -1,5 +1,6 @@
-Weather App
+# Weather App (React project)
 
-TODO :
+Link: <a>https://vladislavsrtkn.github.io/weather-app/</a>
 
-Подровнять позиции скелетонов, дизайн (?)
+<h2>To work on a project:</h2>
+install dependencies through NPM: `npm install`

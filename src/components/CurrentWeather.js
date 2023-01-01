@@ -15,18 +15,16 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
         }}
       >
         <div>
-          <h2 style={{ color: '#fff', fontSize: '3rem', margin: 0, padding: '0.5rem' }}>
-            {Math.round(temp)}°
-          </h2>
+          <h2 style={{ fontSize: '3rem', margin: 0, padding: '0.5rem' }}>{Math.round(temp)}°</h2>
 
-          <p style={{ color: '#fff', fontSize: '1.1rem', paddingLeft: '0.8rem' }}>
+          <p style={{ fontSize: '1.1rem', paddingLeft: '0.8rem' }}>
             {condition} <br />
             <span>Max: {Math.round(max)}°</span>{' '}
             <span style={{ whiteSpace: 'nowrap' }}>min: {Math.round(min)}°</span>
           </p>
         </div>
         <div>
-          <img style={{ width: '80px' }} src={imgSrc} alt={condition}></img>
+          <img style={{ width: '64px' }} src={imgSrc} alt={condition}></img>
         </div>
       </div>
     </BoxBody>

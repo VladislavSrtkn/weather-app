@@ -1,11 +1,11 @@
 export default function Footer() {
   return (
-    <footer style={{ textAlign: 'center', color: '#fff' }}>
+    <footer style={{ textAlign: 'center' }}>
       <p
         style={{
           margin: 0,
           padding: '0.7rem',
-          backgroundColor: '#eea47f',
+          backgroundColor: '#636363a3',
         }}
       >
         Made by{' '}

@@ -6,12 +6,14 @@ export default function Header() {
       <h1
         style={{
           fontSize: '1.5rem',
-          backgroundColor: '#eea47f',
+          margin: 0,
+          padding: '1rem',
+          background: 'linear-gradient(to right, #0d324d, #ffffff00)',
           boxShadow: '#fff 0px 2px 1px 0px',
         }}
       >
         Weather App
-        <WbSunnyIcon sx={{ color: '#fffa00' }} />
+        <WbSunnyIcon />
       </h1>
     </header>
   );

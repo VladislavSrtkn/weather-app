@@ -10,8 +10,8 @@ export default function BoxBody({ children }) {
         marginTop: '2rem',
         marginBottom: '2rem',
         borderRadius: '10px',
-        color: '#fff',
-        backgroundColor: '#02539d',
+        backgroundColor: '#124d8163',
+        overflow: 'hidden',
       }}
     >
       {children}

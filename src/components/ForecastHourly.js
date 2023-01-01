@@ -6,7 +6,7 @@ export default function ForecastHourly({ forecastArray, city, country, scale }) 
   const result = forecastArray.map((item, index) => (
     <ForecastHourBox
       key={item.time}
-      time={index === 0 ? 'now ' : item.time.slice(11, 13)}
+      time={item.time.slice(11, 13)}
       imgAlt={item.condition.text}
       imgSrc={item.condition.icon}
       temp={Math.round(item[`temp_${scale}`])}
@@ -21,8 +21,10 @@ export default function ForecastHourly({ forecastArray, city, country, scale }) 
         style={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
           margin: '1rem',
+          overflowX: 'scroll',
+          overflowY: 'hidden',
         }}
       >
         {result}

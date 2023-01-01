@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import SearchForm from './SearchForm';
 import Header from './Header';
 import Footer from './Footer';
-import WeatherContentBox from './WeatherContentBox';
 import ScaleSwitch from './ScaleSwitch';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import SceletonContent from './SceletonContent';
 import ErrorBox from './ErrorBox';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { IconButton } from '@mui/material';
+import WeatherContentContainer from './WeatherContentContainer';
 
-function App() {
+export default function App() {
   const [city, setCity] = useState(null);
   const [scale, setScale] = useState('c');
   const [searchValue, setSearchValue] = useState('');
@@ -84,7 +84,7 @@ function App() {
           <IconButton
             aria-label='Switch to current location'
             onClick={() => setCurrentLocation()}
-            sx={{ marginTop: '1.2rem', color: '#fff' }}
+            sx={{ marginTop: '1.2rem' }}
           >
             <LocationOnIcon sx={{ fontSize: '2rem' }} />
           </IconButton>
@@ -99,7 +99,7 @@ function App() {
         </div>
         {searchError && <ErrorBox errorText={searchError} />}
         <Grid2 container>
-          {(city && <WeatherContentBox key={city} city={city} scale={scale} />) || (
+          {(city && <WeatherContentContainer key={city} city={city} scale={scale} />) || (
             <SceletonContent />
           )}
         </Grid2>
@@ -108,5 +108,3 @@ function App() {
     </>
   );
 }
-
-export default App;

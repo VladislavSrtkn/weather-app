@@ -5,10 +5,10 @@ import CurrentWeather from './CurrentWeather';
 import TodayCondtions from './TodayConditions';
 import ErrorBox from './ErrorBox';
 
-import getHourlyForecast from './getForecast';
+import getHourlyForecast from '../getHourlyForecast';
 import SceletonContent from './SceletonContent';
 
-export default function WeatherContentBox({ city, scale }) {
+export default function WeatherContentContainer({ city, scale }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -64,7 +64,7 @@ export default function WeatherContentBox({ city, scale }) {
       weather.location.localtime.length === 16
         ? weather.location.localtime
         : weather.location.localtime.slice(0, 11) + '0' + weather.location.localtime.slice(11);
-    const forecast = getHourlyForecast(formattedTime, weather.forecast.forecastday, 5);
+    const forecast = getHourlyForecast(formattedTime, weather.forecast.forecastday, 15);
     const feelsLike = weather.current[`feelslike_${scale}`];
     const sunrise = weather.forecast.forecastday[0].astro.sunrise;
     const sunset = weather.forecast.forecastday[0].astro.sunset;
