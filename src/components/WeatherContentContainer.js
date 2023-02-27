@@ -5,8 +5,11 @@ import CurrentWeather from './CurrentWeather';
 import TodayCondtions from './TodayConditions';
 import ErrorBox from './ErrorBox';
 
+import format from 'date-fns/format';
+
 import getHourlyForecast from '../getHourlyForecast';
 import SceletonContent from './SceletonContent';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 export default function WeatherContentContainer({ city, scale }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -54,7 +57,7 @@ export default function WeatherContentContainer({ city, scale }) {
   if (isReady) {
     const city = weather.location.name;
     const country = weather.location.country;
-    const time = weather.location.localtime.slice(-5);
+    const time = format(new Date(weather.location.localtime), 'p');
     const temp = weather.current[`temp_${scale}`];
     const condition = weather.current.condition.text;
     const maxTemp = weather.forecast.forecastday[0].day[`maxtemp_${scale}`];
@@ -81,7 +84,7 @@ export default function WeatherContentContainer({ city, scale }) {
     const moonPhase = weather.forecast.forecastday[0].astro.moon_phase;
 
     return (
-      <>
+      <Grid2 container>
         <CurrentWeather
           city={city}
           country={country}
@@ -108,7 +111,7 @@ export default function WeatherContentContainer({ city, scale }) {
           indexUV={indexUV}
           moonPhase={moonPhase}
         />
-      </>
+      </Grid2>
     );
   }
 }

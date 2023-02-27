@@ -9,7 +9,6 @@ body * {
   font-family: 'DM Sans', sans-serif !important;
   color: #ececec !important;
 }
-
-::-webkit-scrollbar {
+.hourly-forecast ::-webkit-scrollbar {
   width: 0;
 }

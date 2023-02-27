@@ -3,7 +3,7 @@ import BoxBody from './BoxBody';
 import ForecastHourBox from './ForecastHourBox';
 
 export default function ForecastHourly({ forecastArray, city, country, scale }) {
-  const result = forecastArray.map((item, index) => (
+  const result = forecastArray.map((item) => (
     <ForecastHourBox
       key={item.time}
       time={item.time.slice(11, 13)}
@@ -18,6 +18,7 @@ export default function ForecastHourly({ forecastArray, city, country, scale }) 
       <BoxHeader text={`${city}, ${country} forecast`} />
 
       <div
+        className='hourly-forecast'
         style={{
           display: 'flex',
           flexDirection: 'row',

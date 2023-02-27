@@ -1,20 +1,21 @@
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import { Typography } from '@mui/material';
 
 export default function Header() {
   return (
     <header>
-      <h1
-        style={{
-          fontSize: '1.5rem',
-          margin: 0,
-          padding: '1rem',
+      <Typography
+        variant='h5'
+        component='h1'
+        p={1}
+        sx={{
           background: 'linear-gradient(to right, #0d324d, #ffffff00)',
           boxShadow: '#fff 0px 2px 1px 0px',
         }}
       >
         Weather App
         <WbSunnyIcon />
-      </h1>
+      </Typography>
     </header>
   );
 }

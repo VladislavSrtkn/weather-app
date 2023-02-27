@@ -1,20 +1,20 @@
+import { Box } from '@mui/material';
+
 export default function BoxBody({ children }) {
   return (
-    <div
+    <Box
+      marginY={2}
       style={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: '100%',
-        margin: '1rem',
-        marginTop: '2rem',
-        marginBottom: '2rem',
         borderRadius: '10px',
         backgroundColor: '#124d8163',
         overflow: 'hidden',
       }}
     >
       {children}
-    </div>
+    </Box>
   );
 }

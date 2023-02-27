@@ -15,7 +15,7 @@ export default function App() {
   const [scale, setScale] = useState('c');
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [searchError, setSearcError] = useState(false);
+  const [searchError, setSearchError] = useState(false);
 
   useEffect(() => setCurrentLocation(), []);
 
@@ -29,61 +29,62 @@ export default function App() {
     );
   }
 
-  function addCityBySubmit(e) {
+  function handleSetCityBySubmit(e) {
     e.preventDefault();
     if (searchValue === '') {
       return;
     }
-
-    const cityName = searchResults[0].name;
-
-    setCity(cityName);
-    setSearchValue('');
-    setSearchResults([]);
+    const cityCoordinates = searchResults[0].lat + ' ' + searchResults[0].lon;
+    handleSetCity(cityCoordinates);
   }
 
-  function addCityByClick(cityName) {
-    setCity(cityName);
+  function handleSetCity(cityCoordinates) {
+    setCity(cityCoordinates);
     setSearchValue('');
     setSearchResults([]);
   }
 
   function searchHandler(e) {
     setSearchValue(e.target.value);
+    if (e.target.value === '') {
+      return;
+    }
 
     fetch(
       `https://api.weatherapi.com/v1/search.json?key=c24794a3208345fb9e382502222112&q=${e.target.value}`
     )
       .then((response) => {
         if (response.status === 200) {
-          setSearcError(false);
+          setSearchError(false);
           return response.json().then((result) => setSearchResults([...result]));
         } else {
-          setSearcError('Search failed with error ' + response.status);
+          setSearchError('Search failed with error ' + response.status);
         }
       })
       .catch((err) => {
-        setSearcError('Search failed with error ' + err.message);
+        setSearchError('Search failed with error ' + err.message);
       });
   }
 
   return (
     <>
       <Header />
-      <div
-        style={{ minHeight: '100vh', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}
+      <Grid2
+        container
+        xs={12}
+        sm={8}
+        md={6}
+        lg={4}
+        marginX='auto'
+        marginTop={2}
+        paddingX={1}
+        flexDirection='column'
+        flexWrap='nowrap'
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            paddingTop: '1rem',
-            paddingBottom: '1rem',
-          }}
-        >
+        <Grid2 item display='flex' flex={1} paddingY={1} alignItems='flex-start'>
           <IconButton
             aria-label='Switch to current location'
-            onClick={() => setCurrentLocation()}
+            onClick={setCurrentLocation}
             sx={{ marginTop: '1.2rem' }}
           >
             <LocationOnIcon sx={{ fontSize: '2rem' }} />
@@ -92,18 +93,18 @@ export default function App() {
             value={searchValue}
             searchResults={searchResults}
             changeHandler={searchHandler}
-            submitHandler={addCityBySubmit}
-            clickHandler={addCityByClick}
+            submitHandler={handleSetCityBySubmit}
+            clickHandler={handleSetCity}
           />
           <ScaleSwitch scale={scale} handlerChange={() => setScale(scale === 'c' ? 'f' : 'c')} />
-        </div>
-        {searchError && <ErrorBox errorText={searchError} />}
-        <Grid2 container>
-          {(city && <WeatherContentContainer key={city} city={city} scale={scale} />) || (
-            <SceletonContent />
-          )}
         </Grid2>
-      </div>
+
+        {searchError && <ErrorBox errorText={searchError} />}
+
+        {(city && <WeatherContentContainer key={city} city={city} scale={scale} />) || (
+          <SceletonContent />
+        )}
+      </Grid2>
       <Footer />
     </>
   );
