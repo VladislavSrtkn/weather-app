@@ -9,8 +9,9 @@ export default function SearchForm({
   clickHandler,
 }) {
   const foundItems = searchResults.slice(0, 5).map((city) => {
-    const displayedName = city.name + ', ' + city.region + ', ' + city.country;
+    const displayedName = city.name + (city.region ? `, ${city.region}` : '') + ', ' + city.country;
     const coordinates = city.lat + ' ' + city.lon;
+
     return (
       <Box key={city.id}>
         <ListItem disablePadding onClick={() => clickHandler(coordinates)}>

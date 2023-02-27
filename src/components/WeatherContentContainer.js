@@ -6,6 +6,7 @@ import TodayCondtions from './TodayConditions';
 import ErrorBox from './ErrorBox';
 
 import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 import getHourlyForecast from '../getHourlyForecast';
 import SceletonContent from './SceletonContent';
@@ -57,7 +58,8 @@ export default function WeatherContentContainer({ city, scale }) {
   if (isReady) {
     const city = weather.location.name;
     const country = weather.location.country;
-    const time = format(new Date(weather.location.localtime), 'p');
+    const parsedTime = parse(weather.location.localtime, 'yyyy-M-dd H:m', new Date());
+    const time = format(parsedTime, 'p');
     const temp = weather.current[`temp_${scale}`];
     const condition = weather.current.condition.text;
     const maxTemp = weather.forecast.forecastday[0].day[`maxtemp_${scale}`];
