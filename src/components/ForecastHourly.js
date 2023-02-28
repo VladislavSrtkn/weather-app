@@ -1,6 +1,7 @@
 import BoxHeader from './BoxHeader';
 import BoxBody from './BoxBody';
 import ForecastHourBox from './ForecastHourBox';
+import { Box } from '@mui/material';
 
 export default function ForecastHourly({ forecastArray, city, country, scale }) {
   const result = forecastArray.map((item) => (
@@ -17,19 +18,18 @@ export default function ForecastHourly({ forecastArray, city, country, scale }) 
     <BoxBody>
       <BoxHeader text={`${city}, ${country} forecast`} />
 
-      <div
-        className='hourly-forecast'
-        style={{
+      <Box
+        sx={{
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
-          margin: '1rem',
           overflowX: 'scroll',
           overflowY: 'hidden',
+          p: 2,
         }}
       >
         {result}
-      </div>
+      </Box>
     </BoxBody>
   );
 }

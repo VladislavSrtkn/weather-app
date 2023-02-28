@@ -1,11 +1,13 @@
+import { Box, Typography } from '@mui/material';
+
 export default function ErrorBox({ errorText }) {
   return (
-    <div style={{ padding: '1rem' }}>
-      <h4>Ooops! Something went wrong :(</h4>
-      <p>{errorText}</p>
-      <p>
+    <Box p={1}>
+      <Typography>Ooops! Something went wrong :(</Typography>
+      <Typography my={2}>{errorText}</Typography>
+      <Typography>
         Please make sure you have no problems with your internet connection and try again later.
-      </p>
-    </div>
+      </Typography>
+    </Box>
   );
 }

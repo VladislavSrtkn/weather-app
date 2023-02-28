@@ -10,9 +10,9 @@ export default function SceletonContent() {
 
   return (
     <>
-      <Skeleton variant='rounded' sx={style} width='100%' height={227} />
-      <Skeleton variant='rounded' sx={style} width='100%' height={194} />
-      <Skeleton variant='rounded' sx={style} width='100%' height={426} />
+      <Skeleton variant='rounded' sx={style} width='100%' height={191} />
+      <Skeleton variant='rounded' sx={style} width='100%' height={197} />
+      <Skeleton variant='rounded' sx={style} width='100%' height={424} />
     </>
   );
 }

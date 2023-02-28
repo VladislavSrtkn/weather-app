@@ -1,24 +1,20 @@
+import { Box, Link, Typography } from '@mui/material';
+
 export default function Footer() {
   return (
-    <footer style={{ textAlign: 'center' }}>
-      <p
-        style={{
-          margin: 0,
-          padding: '0.7rem',
-          backgroundColor: '#636363a3',
-        }}
-      >
+    <Box component='footer' textAlign='center'>
+      <Typography sx={{ p: 1, bgcolor: '#636363a3' }}>
         Made by{' '}
-        <a
+        <Link
           href='https://github.com/VladislavSrtkn'
           target='_blank'
           rel='noreferrer'
-          style={{ textDecoration: 'none' }}
+          sx={{ textDecoration: 'none' }}
         >
           Vladislav Sirotkin
-        </a>
+        </Link>{' '}
         , 2022
-      </p>
-    </footer>
+      </Typography>
+    </Box>
   );
 }

@@ -1,32 +1,24 @@
 import BoxHeader from './BoxHeader';
 import BoxBody from './BoxBody';
+import { Box, Typography } from '@mui/material';
 
 export default function CurrentWeather({ city, country, time, temp, condition, max, min, imgSrc }) {
   return (
     <BoxBody>
       <BoxHeader text={`${city}, ${country} ${time}`} />
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          padding: '0.5rem',
-        }}
-      >
-        <div>
-          <h2 style={{ fontSize: '3rem', margin: 0, padding: '0.5rem' }}>{Math.round(temp)}°</h2>
-
-          <p style={{ fontSize: '1.1rem', paddingLeft: '0.8rem' }}>
-            {condition} <br />
-            <span>Max: {Math.round(max)}°</span>{' '}
-            <span style={{ whiteSpace: 'nowrap' }}>min: {Math.round(min)}°</span>
-          </p>
-        </div>
-        <div>
-          <img style={{ width: '64px' }} src={imgSrc} alt={condition}></img>
-        </div>
-      </div>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', p: 3 }}>
+        <Box>
+          <Typography sx={{ fontSize: '2.2rem', m: 0 }}>{Math.round(temp)}°</Typography>
+          <Typography sx={{ fontSize: '1.1rem' }}>{condition}</Typography>
+          <Typography>
+            Max: {Math.round(max)}° min: {Math.round(min)}°
+          </Typography>
+        </Box>
+        <Box>
+          <img width={64} src={imgSrc} alt={condition}></img>
+        </Box>
+      </Box>
     </BoxBody>
   );
 }

@@ -7,7 +7,7 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import SceletonContent from './SceletonContent';
 import ErrorBox from './ErrorBox';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import WeatherContentContainer from './WeatherContentContainer';
 
 export default function App() {
@@ -67,7 +67,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <Box display='flex' flexDirection='column' minHeight='100vh'>
       <Header />
       <Grid2
         container
@@ -77,11 +77,12 @@ export default function App() {
         lg={4}
         marginX='auto'
         marginTop={2}
-        paddingX={1}
+        paddingX={2}
         flexDirection='column'
         flexWrap='nowrap'
+        flex={1}
       >
-        <Grid2 item display='flex' flex={1} paddingY={1} alignItems='flex-start'>
+        <Grid2 item display='flex' paddingY={1} alignItems='flex-start'>
           <IconButton
             aria-label='Switch to current location'
             onClick={setCurrentLocation}
@@ -101,11 +102,9 @@ export default function App() {
 
         {searchError && <ErrorBox errorText={searchError} />}
 
-        {(city && <WeatherContentContainer key={city} city={city} scale={scale} />) || (
-          <SceletonContent />
-        )}
+        {(city && <WeatherContentContainer city={city} scale={scale} />) || <SceletonContent />}
       </Grid2>
       <Footer />
-    </>
+    </Box>
   );
 }

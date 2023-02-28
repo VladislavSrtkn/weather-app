@@ -9,6 +9,7 @@ import InvertColorsIcon from '@mui/icons-material/InvertColors';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import AirIcon from '@mui/icons-material/Air';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
+import { Box, Typography } from '@mui/material';
 
 export default function TodayCondtions({
   city,
@@ -22,19 +23,20 @@ export default function TodayCondtions({
   indexUV,
   moonPhase,
 }) {
+  const style = { mb: '-5px' };
+
   return (
     <BoxBody>
-      <BoxHeader text={`Weather today ${city}, ${country}`} />
+      <BoxHeader text={`Weather today in ${city}, ${country}`} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
-        <div style={{ fontWeight: 'bold' }}>
-          <span style={{ fontSize: '2rem' }}>{Math.round(feelsLike)}°</span>
-          <br />
-          <span style={{ fontSize: '1.1rem' }}>Feels like</span>
-        </div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
+        <Box>
+          <Typography fontSize='2rem'>{Math.round(feelsLike)}°</Typography>
+          <Typography fontSize='1.1rem'>Feels like</Typography>
+        </Box>
 
-        <div
-          style={{
+        <Box
+          sx={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
@@ -42,39 +44,23 @@ export default function TodayCondtions({
           }}
         >
           <WbTwilightIcon fontSize='large' />
-          <div style={{ textAlign: 'center' }}>
-            <FileUploadIcon style={{ marginBottom: '-5px' }} />
+          <Typography pb={0.5}>
+            <FileUploadIcon sx={style} />
             {sunrise}
-            <FileDownloadIcon style={{ marginBottom: '-5px' }} /> {sunset}
-          </div>
-        </div>
-      </div>
+            <FileDownloadIcon sx={style} /> {sunset}
+          </Typography>
+        </Box>
+      </Box>
 
+      <ConditionString icon={<AirIcon sx={style} />} text='Wind' value={wind} />
       <ConditionString
-        icon={<AirIcon style={{ marginBottom: '-5px' }} />}
-        text='Wind'
-        value={wind}
-      />
-      <ConditionString
-        icon={<RemoveRedEyeIcon style={{ marginBottom: '-5px' }} />}
+        icon={<RemoveRedEyeIcon sx={style} />}
         text='Visibility'
         value={visibility}
       />
-      <ConditionString
-        icon={<InvertColorsIcon style={{ marginBottom: '-5px' }} />}
-        text='Humidity'
-        value={humidity}
-      />
-      <ConditionString
-        icon={<WbSunnyIcon style={{ marginBottom: '-5px' }} />}
-        text='UV index'
-        value={indexUV}
-      />
-      <ConditionString
-        icon={<ModeNightIcon style={{ marginBottom: '-5px' }} />}
-        text='Moon phase'
-        value={moonPhase}
-      />
+      <ConditionString icon={<InvertColorsIcon sx={style} />} text='Humidity' value={humidity} />
+      <ConditionString icon={<WbSunnyIcon sx={style} />} text='UV index' value={indexUV} />
+      <ConditionString icon={<ModeNightIcon sx={style} />} text='Moon phase' value={moonPhase} />
     </BoxBody>
   );
 }

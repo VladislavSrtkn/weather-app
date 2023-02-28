@@ -1,13 +1,18 @@
+import { Box, Typography } from '@mui/material';
+
 export default function ForecastHourBox({ time, imgAlt, imgSrc, temp }) {
+  const style = {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    py: 1,
+    px: 3,
+  };
+
   return (
-    <div style={{ padding: '0.8rem' }}>
-      <span style={{ display: 'block', textAlign: 'center', fontWeight: 'bold' }}>{time}</span>
-      <br />
-      <img alt={imgAlt} style={{ width: '40px' }} src={imgSrc}></img>
-      <br />
-      <span style={{ display: 'block', textAlign: 'center', fontSize: '1rem', fontWeight: 'bold' }}>
-        {temp}°
-      </span>
-    </div>
+    <Box textAlign='center'>
+      <Typography sx={style}>{time}</Typography>
+      <img alt={imgAlt} width={40} src={imgSrc}></img>
+      <Typography sx={style}>{temp}°</Typography>
+    </Box>
   );
 }

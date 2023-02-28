@@ -1,17 +1,12 @@
+import { Box, Typography } from '@mui/material';
+
 export default function ConditionString({ icon, text, value }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        padding: '1rem',
-      }}
-    >
-      <span>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', p: 2 }}>
+      <Typography>
         {icon} {text}
-      </span>
-      {value}
-    </div>
+      </Typography>
+      <Typography>{value}</Typography>
+    </Box>
   );
 }

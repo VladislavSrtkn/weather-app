@@ -1,8 +1,9 @@
 import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { Typography } from '@mui/material';
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const MaterialUISwitch = styled(Switch)(() => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -36,7 +37,7 @@ export default function ScaleSwitch({ scale, handlerChange }) {
     <FormControlLabel
       sx={{ marginTop: '1.2rem' }}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={handlerChange} />}
-      label={<span style={{ fontWeight: 'bold' }}>{scale.toUpperCase()}</span>}
+      label={<Typography fontWeight='bold'>{scale.toUpperCase()}</Typography>}
     />
   );
 }
