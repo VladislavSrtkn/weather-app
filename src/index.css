@@ -2,10 +2,8 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to bottom, #09c6f9, #045de9);
 }
 
 body * {
   font-family: 'DM Sans', sans-serif !important;
-  color: #ececec !important;
 }

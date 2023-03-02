@@ -13,10 +13,9 @@ const MaterialUISwitch = styled(Switch)(() => ({
     transform: 'translateX(6px)',
     '&.Mui-checked': {
       transform: 'translateX(22px)',
-      '& .MuiSwitch-thumb:before': {},
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: '#d9e0e6',
+        backgroundColor: '#3c75c7',
       },
     },
   },
@@ -27,7 +26,7 @@ const MaterialUISwitch = styled(Switch)(() => ({
   },
   '& .MuiSwitch-track': {
     opacity: 1,
-    backgroundColor: '#d9e0e6',
+    backgroundColor: '#3c75c7',
     borderRadius: 20 / 2,
   },
 }));
@@ -35,9 +34,12 @@ const MaterialUISwitch = styled(Switch)(() => ({
 export default function ScaleSwitch({ scale, handlerChange }) {
   return (
     <FormControlLabel
-      sx={{ marginTop: '1.2rem' }}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={handlerChange} />}
-      label={<Typography fontWeight='bold'>{scale.toUpperCase()}</Typography>}
+      label={
+        <Typography color='#3c75c7' fontWeight='bold'>
+          {scale.toUpperCase()}
+        </Typography>
+      }
     />
   );
 }

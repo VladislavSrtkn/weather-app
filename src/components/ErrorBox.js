@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 
 export default function ErrorBox({ errorText }) {
   return (
-    <Box p={1}>
+    <Box sx={{ p: 1, mt: 6 }}>
       <Typography>Ooops! Something went wrong :(</Typography>
       <Typography my={2}>{errorText}</Typography>
       <Typography>

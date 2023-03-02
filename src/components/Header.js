@@ -7,11 +7,7 @@ export default function Header() {
       <Typography
         variant='h5'
         component='h1'
-        sx={{
-          background: 'linear-gradient(to right, #0d324d, #ffffff00)',
-          boxShadow: '#fff 0px 2px 1px 0px',
-          p: 1.5,
-        }}
+        sx={{ bgcolor: '#4b9aef', boxShadow: '#fff 0px 2px 1px 0px', p: 1.5, color: '#fff' }}
       >
         Weather App
         <WbSunnyIcon />

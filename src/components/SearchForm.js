@@ -1,40 +1,73 @@
-import { Divider, List, ListItem, ListItemButton, ListItemText, TextField } from '@mui/material';
+import { Autocomplete, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useState } from 'react';
+import ErrorBox from './ErrorBox';
 
-export default function SearchForm({
-  value,
-  changeHandler,
-  submitHandler,
-  searchResults,
-  clickHandler,
-}) {
-  const foundItems = searchResults.slice(0, 5).map((city) => {
-    const displayedName = city.name + (city.region ? `, ${city.region}` : '') + ', ' + city.country;
-    const coordinates = city.lat + ' ' + city.lon;
+export default function SearchForm({ changeHandler }) {
+  const [searchValue, setSearchValue] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchError, setSearchError] = useState(false);
 
-    return (
-      <Box key={city.id}>
-        <ListItem disablePadding onClick={() => clickHandler(coordinates)}>
-          <ListItemButton>
-            <ListItemText primary={displayedName}></ListItemText>
-          </ListItemButton>
-        </ListItem>
-        <Divider sx={{ backgroundColor: '#fff' }} />
-      </Box>
-    );
+  function searchHandler(value) {
+    setSearchValue(value);
+    if (value === '') {
+      setSearchResults([]);
+      setSearchError('');
+      return;
+    }
+
+    fetch(`https://api.weatherapi.com/v1/search.json?key=c24794a3208345fb9e382502222112&q=${value}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setSearchError(false);
+          return response.json().then((result) => setSearchResults([...result]));
+        } else {
+          setSearchError('Search failed with error ' + response.status);
+        }
+      })
+      .catch((err) => {
+        setSearchError('Search failed with error ' + err.message);
+      });
+  }
+
+  function handleSetCity(city) {
+    setSearchError(false);
+    setSearchResults([]);
+    setSearchValue('');
+
+    changeHandler(city);
+  }
+
+  const cities = searchResults.slice(0, 5).map((city) => {
+    const label = city.name + (city.region ? `, ${city.region}` : '') + ', ' + city.country;
+    return { label, key: city.id };
   });
 
   return (
-    <form style={{ margin: '1rem', flex: 1 }} onSubmit={(e) => submitHandler(e)}>
-      <TextField
-        sx={{ width: '100%' }}
-        size='normal'
-        variant='outlined'
-        label='Enter city name'
-        value={value}
-        onChange={(e) => changeHandler(e)}
-      ></TextField>
-      <List>{foundItems}</List>
-    </form>
+    <Box sx={{ flex: 1 }}>
+      <Autocomplete
+        options={cities}
+        freeSolo
+        value={searchValue}
+        onInputChange={(e, value, reason) => (reason === 'clear' ? searchHandler('') : undefined)}
+        fullWidth
+        onChange={(e, city) => (city ? handleSetCity(city.label) : undefined)}
+        renderInput={(params) => (
+          <TextField
+            value={searchValue}
+            onChange={(e) => searchHandler(e.target.value)}
+            {...params}
+            label='Find a city'
+          />
+        )}
+        renderOption={(props, option) => (
+          <li {...props} key={option.key}>
+            <Typography sx={{ color: '#000000' }}>{option.label}</Typography>
+          </li>
+        )}
+      />
+
+      {searchError && <ErrorBox errorText={searchError} />}
+    </Box>
   );
 }

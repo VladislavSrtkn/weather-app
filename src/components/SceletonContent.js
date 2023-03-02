@@ -2,7 +2,7 @@ import { Skeleton } from '@mui/material';
 
 export default function SceletonContent() {
   const style = {
-    backgroundColor: '#124d8163',
+    backgroundColor: '#4b9aef9c',
     borderRadius: '10px',
     marginTop: '16px',
     marginBottom: '16px',

@@ -9,9 +9,10 @@ export default function BoxBody({ children }) {
         justifyContent: 'space-between',
         width: '100%',
         borderRadius: '10px',
-        bgcolor: '#124d8163',
+        bgcolor: '#0d82eacf',
         overflow: 'hidden',
         marginY: 2,
+        color: '#fff',
       }}
     >
       {children}
