@@ -3,22 +3,21 @@ import { useEffect, useState } from 'react';
 import ForecastHourly from './ForecastHourly';
 import CurrentWeather from './CurrentWeather';
 import TodayCondtions from './TodayConditions';
-import ErrorBox from './ErrorBox';
 
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 
 import getHourlyForecast from '../getHourlyForecast';
 import SceletonContent from './SceletonContent';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
-export default function WeatherContentContainer({ city, scale }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+import { Box } from '@mui/material';
+
+export default function WeatherContentContainer({ city, scale, onError }) {
+  const [status, setStatus] = useState('idle');
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
+    setStatus('loading');
     fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=c24794a3208345fb9e382502222112&q=${city}&aqi=no&days=3`
     )
@@ -28,12 +27,11 @@ export default function WeatherContentContainer({ city, scale }) {
             .json()
             .then((result) => setWeather({ ...result }))
             .then(() => {
-              setIsLoading(false);
-              setIsReady(true);
+              setStatus('succeeded');
             });
         } else {
-          setIsLoading(false);
-          setIsError(response.status);
+          setStatus('failed');
+          onError(true);
           console.log(
             'API request failed, code: ' +
               response.status +
@@ -42,20 +40,17 @@ export default function WeatherContentContainer({ city, scale }) {
         }
       })
       .catch((err) => {
-        setIsLoading(false);
-        setIsError(err.message);
+        setStatus('failed');
+        onError(true);
+        console.log('Error: ' + err.message);
       });
-  }, [city]);
+  }, [city, onError]);
 
-  if (isLoading) {
+  if (status === 'loading') {
     return <SceletonContent />;
   }
 
-  if (isError) {
-    return <ErrorBox errorText={isError} />;
-  }
-
-  if (isReady) {
+  if (status === 'succeeded') {
     const city = weather.location.name;
     const country = weather.location.country;
     const parsedTime = parse(weather.location.localtime, 'yyyy-M-dd H:m', new Date());
@@ -86,7 +81,7 @@ export default function WeatherContentContainer({ city, scale }) {
     const moonPhase = weather.forecast.forecastday[0].astro.moon_phase;
 
     return (
-      <Grid2 container>
+      <Box>
         <CurrentWeather
           city={city}
           country={country}
@@ -113,7 +108,7 @@ export default function WeatherContentContainer({ city, scale }) {
           indexUV={indexUV}
           moonPhase={moonPhase}
         />
-      </Grid2>
+      </Box>
     );
   }
 }

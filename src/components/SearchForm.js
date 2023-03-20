@@ -1,41 +1,51 @@
-import { Autocomplete, TextField, Typography } from '@mui/material';
+import { Autocomplete, CircularProgress, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
-import ErrorBox from './ErrorBox';
+import React from 'react';
 
-export default function SearchForm({ changeHandler }) {
+export default function SearchForm({ onChange, onError }) {
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [searchError, setSearchError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function searchHandler(value) {
+  function handleSearch(value) {
     setSearchValue(value);
+    setLoading(true);
+
     if (value === '') {
       setSearchResults([]);
-      setSearchError('');
+      onError(false);
+      setLoading(false);
       return;
     }
 
     fetch(`https://api.weatherapi.com/v1/search.json?key=c24794a3208345fb9e382502222112&q=${value}`)
       .then((response) => {
         if (response.status === 200) {
-          setSearchError(false);
+          onError(false);
           return response.json().then((result) => setSearchResults([...result]));
         } else {
-          setSearchError('Search failed with error ' + response.status);
+          onError(true);
+          console.log(
+            'API request failed, code: ' +
+              response.status +
+              '. About type of error: https://www.weatherapi.com/docs/'
+          );
         }
       })
       .catch((err) => {
-        setSearchError('Search failed with error ' + err.message);
-      });
+        onError(true);
+        console.log('Error: ' + err.message);
+      })
+      .finally(setTimeout(() => setLoading(false), 500));
   }
 
   function handleSetCity(city) {
-    setSearchError(false);
     setSearchResults([]);
     setSearchValue('');
+    setLoading(false);
 
-    changeHandler(city);
+    onChange(city);
   }
 
   const cities = searchResults.slice(0, 5).map((city) => {
@@ -49,25 +59,35 @@ export default function SearchForm({ changeHandler }) {
         options={cities}
         freeSolo
         value={searchValue}
-        onInputChange={(e, value, reason) => (reason === 'clear' ? searchHandler('') : undefined)}
+        onBlur={() => setLoading(false)}
+        onInputChange={(e, value, reason) => (reason === 'clear' ? handleSearch('') : undefined)}
         fullWidth
         onChange={(e, city) => (city ? handleSetCity(city.label) : undefined)}
         renderInput={(params) => (
           <TextField
-            value={searchValue}
-            onChange={(e) => searchHandler(e.target.value)}
             {...params}
+            value={searchValue}
+            onChange={(e) => handleSearch(e.target.value)}
             label='Find a city'
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loading && (
+                    <CircularProgress sx={{ color: (theme) => theme.palette.custom }} size={20} />
+                  )}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
           />
         )}
         renderOption={(props, option) => (
           <li {...props} key={option.key}>
-            <Typography sx={{ color: '#000000' }}>{option.label}</Typography>
+            <Typography>{option.label}</Typography>
           </li>
         )}
       />
-
-      {searchError && <ErrorBox errorText={searchError} />}
     </Box>
   );
 }

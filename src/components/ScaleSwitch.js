@@ -1,45 +1,55 @@
-import { styled } from '@mui/material/styles';
+import { styled, ThemeProvider } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { Typography } from '@mui/material';
+import theme from './/../customTheme';
+import { useTheme } from '@mui/material/styles';
 
-const MaterialUISwitch = styled(Switch)(() => ({
-  width: 62,
-  height: 34,
-  padding: 7,
-  '& .MuiSwitch-switchBase': {
-    margin: 1,
-    padding: 0,
-    transform: 'translateX(6px)',
-    '&.Mui-checked': {
-      transform: 'translateX(22px)',
-      '& + .MuiSwitch-track': {
-        opacity: 1,
-        backgroundColor: '#3c75c7',
+const MaterialUISwitch = styled(Switch)(() => {
+  const theme = useTheme();
+
+  return {
+    width: 56,
+    height: 30,
+    padding: 7,
+    '& .MuiSwitch-switchBase': {
+      margin: 1,
+      padding: 0,
+      transform: 'translateX(6px)',
+      '&.Mui-checked': {
+        transform: 'translateX(22px)',
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: theme.palette.custom,
+        },
       },
     },
-  },
-  '& .MuiSwitch-thumb': {
-    width: 32,
-    height: 32,
-    backgroundColor: '#fff',
-  },
-  '& .MuiSwitch-track': {
-    opacity: 1,
-    backgroundColor: '#3c75c7',
-    borderRadius: 20 / 2,
-  },
-}));
+    '& .MuiSwitch-thumb': {
+      width: 26,
+      height: 26,
+      backgroundColor: '#fff',
+    },
+    '& .MuiSwitch-track': {
+      opacity: 1,
+      backgroundColor: theme.palette.custom,
+      borderRadius: 20 / 2,
+    },
+  };
+});
 
-export default function ScaleSwitch({ scale, handlerChange }) {
+export default function ScaleSwitch({ cheked, label, onChange }) {
   return (
-    <FormControlLabel
-      control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={handlerChange} />}
-      label={
-        <Typography color='#3c75c7' fontWeight='bold'>
-          {scale.toUpperCase()}
-        </Typography>
-      }
-    />
+    <ThemeProvider theme={theme}>
+      <FormControlLabel
+        labelPlacement='top'
+        sx={{ justifyContent: 'flex-end', m: 0 }}
+        control={<MaterialUISwitch checked={cheked} onChange={onChange} />}
+        label={
+          <Typography sx={{ color: (theme) => theme.palette.custom, fontSize: 13, pt: 0.2 }}>
+            {label.toUpperCase()}
+          </Typography>
+        }
+      />
+    </ThemeProvider>
   );
 }
