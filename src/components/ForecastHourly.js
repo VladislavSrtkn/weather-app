@@ -2,17 +2,23 @@ import BoxHeader from './BoxHeader';
 import BoxBody from './BoxBody';
 import ForecastHourBox from './ForecastHourBox';
 import { Box } from '@mui/material';
+import { format, parse } from 'date-fns';
 
 export default function ForecastHourly({ forecastArray, city, country, scale }) {
-  const result = forecastArray.map((item) => (
-    <ForecastHourBox
-      key={item.time}
-      time={item.time.slice(11, 13)}
-      imgAlt={item.condition.text}
-      imgSrc={item.condition.icon}
-      temp={Math.round(item[`temp_${scale}`])}
-    />
-  ));
+  const result = forecastArray.map((item) => {
+    const parsedTime = parse(item.time, 'yyyy-M-dd H:m', new Date());
+    const time = format(parsedTime, 'h a');
+
+    return (
+      <ForecastHourBox
+        key={item.time}
+        time={time}
+        imgAlt={item.condition.text}
+        imgSrc={item.condition.icon}
+        temp={Math.round(item[`temp_${scale}`])}
+      />
+    );
+  });
 
   return (
     <BoxBody>
