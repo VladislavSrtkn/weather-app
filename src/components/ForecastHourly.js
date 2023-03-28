@@ -1,8 +1,10 @@
+import { Box } from '@mui/material';
+
+import { format, parse } from 'date-fns';
+
 import BoxHeader from './BoxHeader';
 import BoxBody from './BoxBody';
 import ForecastHourBox from './ForecastHourBox';
-import { Box } from '@mui/material';
-import { format, parse } from 'date-fns';
 
 export default function ForecastHourly({ forecastArray, city, country, scale }) {
   const result = forecastArray.map((item) => {
@@ -21,7 +23,7 @@ export default function ForecastHourly({ forecastArray, city, country, scale }) 
   });
 
   return (
-    <BoxBody>
+    <BoxBody order={1}>
       <BoxHeader text={`${city}, ${country} forecast`} />
 
       <Box

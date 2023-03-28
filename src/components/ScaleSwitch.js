@@ -2,8 +2,9 @@ import { styled, ThemeProvider } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { Typography } from '@mui/material';
-import theme from './/../customTheme';
 import { useTheme } from '@mui/material/styles';
+
+import theme from './/../customTheme';
 
 const MaterialUISwitch = styled(Switch)(() => {
   const theme = useTheme();

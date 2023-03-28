@@ -1,18 +1,32 @@
 import { Skeleton } from '@mui/material';
+import { Box } from '@mui/system';
 
 export default function SceletonContent() {
   const style = {
     backgroundColor: '#4b9aef9c',
     borderRadius: '10px',
-    marginTop: '16px',
-    marginBottom: '16px',
+    my: 2,
   };
 
   return (
-    <>
-      <Skeleton variant='rounded' sx={style} width='100%' height={191} />
-      <Skeleton variant='rounded' sx={style} width='100%' height={197} />
-      <Skeleton variant='rounded' sx={style} width='100%' height={424} />
-    </>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', columnGap: 2 }}>
+      <Skeleton
+        variant='rounded'
+        sx={{ ...style, width: { xs: '100%', lg: '25%', xl: '30%' }, height: { xs: 191, lg: 293 } }}
+      />
+      <Skeleton
+        variant='rounded'
+        sx={{
+          ...style,
+          width: { xs: '100%', lg: 'auto' },
+          height: { xs: 197, lg: 293 },
+          flexGrow: { lg: 1 },
+        }}
+      />
+      <Skeleton
+        variant='rounded'
+        sx={{ ...style, width: { xs: '100%' }, height: { xs: 424, lg: 189 } }}
+      />
+    </Box>
   );
 }

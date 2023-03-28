@@ -10,7 +10,7 @@ import parse from 'date-fns/parse';
 import getHourlyForecast from '../getHourlyForecast';
 import SceletonContent from './SceletonContent';
 
-import { Box } from '@mui/material';
+import { Grid } from '@mui/material';
 
 export default function WeatherContentContainer({ city, scale, onError }) {
   const [status, setStatus] = useState('idle');
@@ -81,7 +81,7 @@ export default function WeatherContentContainer({ city, scale, onError }) {
     const moonPhase = weather.forecast.forecastday[0].astro.moon_phase;
 
     return (
-      <Box>
+      <Grid container spacing={2} sx={{ mb: 3 }}>
         <CurrentWeather
           city={city}
           country={country}
@@ -108,7 +108,7 @@ export default function WeatherContentContainer({ city, scale, onError }) {
           indexUV={indexUV}
           moonPhase={moonPhase}
         />
-      </Box>
+      </Grid>
     );
   }
 }

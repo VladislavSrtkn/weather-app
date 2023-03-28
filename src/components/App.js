@@ -1,15 +1,18 @@
+import { Box } from '@mui/system';
+import { Grid } from '@mui/material';
+
 import { useEffect, useState } from 'react';
+
+import { getScaleFromStorage, setScaleToStorage } from '../scale';
+
+import FindMeButton from './FindMeButton';
+import ErrorBox from './ErrorBox';
 import SearchForm from './SearchForm';
 import Header from './Header';
 import Footer from './Footer';
 import ScaleSwitch from './ScaleSwitch';
 import SceletonContent from './SceletonContent';
-import { Grid } from '@mui/material';
 import WeatherContentContainer from './WeatherContentContainer';
-import { Box } from '@mui/system';
-import { getScaleFromStorage, setScaleToStorage } from '../scale';
-import FindMeButton from './FindMeButton';
-import ErrorBox from './ErrorBox';
 
 export default function App() {
   const [city, setCity] = useState(null);
@@ -45,9 +48,17 @@ export default function App() {
       }}
     >
       <Header />
-      <Grid container justifyContent='center' flexGrow='1' sx={{ px: 1 }}>
-        <Grid item xs={12} sm={8} md={6} lg={4}>
-          <Box sx={{ display: 'flex', my: 2, gap: 1 }}>
+      <Grid
+        container
+        sx={{
+          px: 1,
+          justifyContent: { xs: 'center', lg: 'flex-start' },
+          flexGrow: '1',
+          flexDirection: { lg: 'column' },
+        }}
+      >
+        <Grid item xs={12} sm={8} md={6} lg={12} sx={{ width: '100%' }}>
+          <Box sx={{ display: 'flex', my: 2, gap: 1, maxWidth: { lg: 700 } }}>
             <FindMeButton onClick={setCurrentLocation} />
             <SearchForm onChange={setCity} onError={setIsError} />
             <ScaleSwitch label={scale} cheked={isScaleSwitchCheked} onChange={handleSwitchScale} />
@@ -58,6 +69,7 @@ export default function App() {
           )}
         </Grid>
       </Grid>
+
       <Footer />
     </Box>
   );

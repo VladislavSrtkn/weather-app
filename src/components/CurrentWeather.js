@@ -1,10 +1,11 @@
+import { Box, Typography } from '@mui/material';
+
 import BoxHeader from './BoxHeader';
 import BoxBody from './BoxBody';
-import { Box, Typography } from '@mui/material';
 
 export default function CurrentWeather({ city, country, time, temp, condition, max, min, imgSrc }) {
   return (
-    <BoxBody>
+    <BoxBody order={0} cols={3}>
       <BoxHeader text={`${city}, ${country} ${time}`} />
 
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', p: 3 }}>

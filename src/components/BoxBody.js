@@ -1,17 +1,28 @@
-import { Box } from '@mui/material';
+import { Grid } from '@mui/material';
+import { Box } from '@mui/system';
 
-export default function BoxBody({ children }) {
+export default function BoxBody({ children, order, cols = 12 }) {
   return (
-    <Box
+    <Grid
+      item
+      xs={12}
+      lg={cols}
       sx={{
-        borderRadius: '10px',
-        bgcolor: '#0d82eacf',
-        overflow: 'hidden',
-        my: 2,
-        color: '#fff',
+        order: order,
       }}
     >
-      {children}
-    </Box>
+      <Box
+        sx={{
+          borderRadius: '10px',
+          bgcolor: '#0d82eacf',
+          overflow: 'hidden',
+          my: 2,
+          color: '#fff',
+          height: '90%',
+        }}
+      >
+        {children}
+      </Box>
+    </Grid>
   );
 }
