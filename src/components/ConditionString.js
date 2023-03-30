@@ -1,28 +1,22 @@
-import { Box, Divider, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 export default function ConditionString({ icon, text, value }) {
-  const theme = useTheme();
-  const isLargeDisplay = useMediaQuery(theme.breakpoints.up('lg'));
-
   return (
-    <>
+    <Grid item xs={12} md={6}>
       <Box
         sx={{
           display: 'flex',
-          justifyContent: { xs: 'space-between', lg: 'flex-start' },
+          justifyContent: { xs: 'space-between', md: 'flex-start' },
           alignItems: 'flex-end',
           minWidth: '30%',
           py: 2,
         }}
       >
-        {isLargeDisplay && (
-          <Divider orientation='vertical' flexItem sx={{ borderColor: '#ffffff85' }} />
-        )}
-        <Typography sx={{ px: { lg: 2 } }}>
+        <Typography sx={{ px: { md: 2 } }}>
           {icon} {text}
         </Typography>
         <Typography>{value}</Typography>
       </Box>
-    </>
+    </Grid>
   );
 }

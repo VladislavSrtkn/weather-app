@@ -5,14 +5,12 @@ import { useEffect, useState } from 'react';
 
 import { getScaleFromStorage, setScaleToStorage } from '../scale';
 
-import FindMeButton from './FindMeButton';
 import ErrorBox from './ErrorBox';
-import SearchForm from './SearchForm';
 import Header from './Header';
 import Footer from './Footer';
-import ScaleSwitch from './ScaleSwitch';
 import SceletonContent from './SceletonContent';
 import WeatherContentContainer from './WeatherContentContainer';
+import ControlPanel from './ControlPanel';
 
 export default function App() {
   const [city, setCity] = useState(null);
@@ -47,7 +45,7 @@ export default function App() {
         flexDirection: 'column',
       }}
     >
-      <Header />
+      <Header scale={scale} cheked={isScaleSwitchCheked} onChange={handleSwitchScale} />
       <Grid
         container
         maxWidth='lg'
@@ -59,12 +57,14 @@ export default function App() {
         }}
       >
         <Grid item xs={12}>
-          <Box sx={{ display: 'flex', my: 2, gap: 1, maxWidth: { lg: 700 } }}>
-            <FindMeButton onClick={setCurrentLocation} />
-            <SearchForm onChange={setCity} onError={setIsError} />
-            <ScaleSwitch label={scale} cheked={isScaleSwitchCheked} onChange={handleSwitchScale} />
-          </Box>
+          <ControlPanel
+            handleSetCurrentLocation={setCurrentLocation}
+            handleSetCity={setCity}
+            onError={setIsError}
+          />
+
           {isError && <ErrorBox />}
+
           {(city && <WeatherContentContainer onError={setIsError} city={city} scale={scale} />) || (
             <SceletonContent />
           )}

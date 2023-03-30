@@ -74,9 +74,7 @@ export default function SearchForm({ onChange, onError }) {
               ...params.InputProps,
               endAdornment: (
                 <>
-                  {loading && (
-                    <CircularProgress sx={{ color: (theme) => theme.palette.custom }} size={20} />
-                  )}
+                  {loading && <CircularProgress size={20} />}
                   {params.InputProps.endAdornment}
                 </>
               ),

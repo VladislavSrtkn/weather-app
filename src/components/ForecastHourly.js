@@ -1,9 +1,7 @@
-import { Box } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, Grid } from '@mui/material';
 
 import { format, parse } from 'date-fns';
 
-import BoxHeader from './BoxHeader';
-import BoxBody from './BoxBody';
 import ForecastHourBox from './ForecastHourBox';
 
 export default function ForecastHourly({ forecastArray, city, country, scale }) {
@@ -23,21 +21,24 @@ export default function ForecastHourly({ forecastArray, city, country, scale }) 
   });
 
   return (
-    <BoxBody order={1}>
-      <BoxHeader text={`${city}, ${country} forecast`} />
-
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          overflowX: { xs: 'scroll', lg: 'auto' },
-          overflowY: 'hidden',
-          p: 2,
-        }}
-      >
-        {result}
-      </Box>
-    </BoxBody>
+    <Grid item xs={12} sx={{ my: 3, order: 1 }}>
+      <Card>
+        <CardHeader title={`${city}, ${country} forecast`} />
+        <CardContent>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              overflowX: { xs: 'scroll', lg: 'auto' },
+              overflowY: 'hidden',
+              pb: 2,
+            }}
+          >
+            {result}
+          </Box>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 }

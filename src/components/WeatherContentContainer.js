@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { Grid } from '@mui/material';
 
-import ForecastHourly from './ForecastHourly';
-import CurrentWeather from './CurrentWeather';
-import TodayCondtions from './TodayConditions';
+import { useEffect, useState } from 'react';
 
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 
 import getHourlyForecast from '../getHourlyForecast';
-import SceletonContent from './SceletonContent';
 
-import { Grid } from '@mui/material';
+import SceletonContent from './SceletonContent';
+import ForecastHourly from './ForecastHourly';
+import CurrentWeather from './CurrentWeather';
+import TodayCondtions from './TodayConditions';
 
 export default function WeatherContentContainer({ city, scale, onError }) {
   const [status, setStatus] = useState('idle');
@@ -81,7 +81,7 @@ export default function WeatherContentContainer({ city, scale, onError }) {
     const moonPhase = weather.forecast.forecastday[0].astro.moon_phase;
 
     return (
-      <Grid container spacing={2} sx={{ mb: 3 }}>
+      <Grid container sx={{ mb: 3 }}>
         <CurrentWeather
           city={city}
           country={country}
