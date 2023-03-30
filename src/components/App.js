@@ -50,6 +50,7 @@ export default function App() {
       <Header />
       <Grid
         container
+        maxWidth='lg'
         sx={{
           px: 1,
           justifyContent: { xs: 'center', lg: 'flex-start' },
@@ -57,7 +58,7 @@ export default function App() {
           flexDirection: { lg: 'column' },
         }}
       >
-        <Grid item xs={12} sm={8} md={6} lg={12} sx={{ width: '100%' }}>
+        <Grid item xs={12}>
           <Box sx={{ display: 'flex', my: 2, gap: 1, maxWidth: { lg: 700 } }}>
             <FindMeButton onClick={setCurrentLocation} />
             <SearchForm onChange={setCity} onError={setIsError} />

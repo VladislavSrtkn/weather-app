@@ -31,7 +31,7 @@ export default function ForecastHourly({ forecastArray, city, country, scale }) 
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
-          overflowX: 'scroll',
+          overflowX: { xs: 'scroll', lg: 'auto' },
           overflowY: 'hidden',
           p: 2,
         }}

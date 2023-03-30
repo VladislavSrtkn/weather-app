@@ -8,7 +8,14 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
     <BoxBody order={0} cols={3}>
       <BoxHeader text={`${city}, ${country} ${time}`} />
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', p: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: { xs: 'space-between', sm: 'flex-start' },
+          p: 3,
+        }}
+      >
         <Box>
           <Typography sx={{ fontSize: '2.2rem', m: 0 }}>{Math.round(temp)}°</Typography>
           <Typography sx={{ fontSize: '1.1rem' }}>{condition}</Typography>
