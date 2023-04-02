@@ -1,3 +1,5 @@
+import { CardContent, CardHeader, Grid, useMediaQuery, useTheme } from '@mui/material';
+
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import InvertColorsIcon from '@mui/icons-material/InvertColors';
@@ -6,9 +8,8 @@ import AirIcon from '@mui/icons-material/Air';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import { DeviceThermostat } from '@mui/icons-material';
 
-import { Card, CardContent, CardHeader, Grid, useMediaQuery, useTheme } from '@mui/material';
-
 import ConditionString from './ConditionString';
+import CustomCard from './CustomCard';
 
 export default function TodayCondtions({
   city,
@@ -24,12 +25,13 @@ export default function TodayCondtions({
 }) {
   const style = { mb: '-5px' };
 
+  // On lg+ screens (1200px) moves container to the top
   const theme = useTheme();
   const order = useMediaQuery(theme.breakpoints.up('lg')) ? 0 : 2;
 
   return (
     <Grid item xs={12} lg={9} sx={{ pl: { lg: 2 }, my: 3, flexGrow: 1, order: order }}>
-      <Card>
+      <CustomCard>
         <CardHeader title={`Weather today in ${city}, ${country}`} />
         <CardContent sx={{ p: 3 }}>
           <Grid container>
@@ -59,7 +61,7 @@ export default function TodayCondtions({
             />
           </Grid>
         </CardContent>
-      </Card>
+      </CustomCard>
     </Grid>
   );
 }

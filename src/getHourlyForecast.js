@@ -1,11 +1,12 @@
-export default function getHourlyForecast(time, forecastArray, hours) {
-  const currentHours = new Date(time).getHours();
-  const currentDay = forecastArray[0].hour;
-  const nextDay = forecastArray[1].hour;
+// Pass or change the default value of the third parameter to change the number of forecast hours displayed
 
-  let result;
+export default function getHourlyForecast(time, forecast, hours = 15) {
+  const currentHours = time.getHours();
+  const currentDay = forecast[0].hour;
+  const nextDay = forecast[1].hour;
 
-  result = currentDay.slice(currentHours, currentHours + hours);
+  let result = currentDay.slice(currentHours, currentHours + hours);
+
   if (result.length < hours) {
     const difference = hours - result.length;
     result = [...result, ...nextDay.slice(0, difference)];

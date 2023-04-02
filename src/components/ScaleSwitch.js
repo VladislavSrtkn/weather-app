@@ -1,7 +1,8 @@
-import { styled } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { Typography } from '@mui/material';
+
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 
 const MaterialUISwitch = styled(Switch)(() => {
@@ -36,12 +37,12 @@ const MaterialUISwitch = styled(Switch)(() => {
   };
 });
 
-export default function ScaleSwitch({ cheked, label, onChange }) {
+export default function ScaleSwitch({ cheсked, label, onChange }) {
   return (
     <FormControlLabel
       labelPlacement='start'
       sx={{ justifyContent: 'flex-end', m: 0 }}
-      control={<MaterialUISwitch checked={cheked} onChange={onChange} />}
+      control={<MaterialUISwitch checked={cheсked} onChange={onChange} />}
       label={<Typography>°{label.toUpperCase()}</Typography>}
     />
   );

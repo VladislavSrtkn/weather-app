@@ -8,7 +8,6 @@ export default function ConditionString({ icon, text, value }) {
           display: 'flex',
           justifyContent: { xs: 'space-between', md: 'flex-start' },
           alignItems: 'flex-end',
-          minWidth: '30%',
           py: 2,
         }}
       >

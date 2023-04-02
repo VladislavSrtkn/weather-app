@@ -25,6 +25,7 @@ export default function App() {
   function setCurrentLocation() {
     setCity(null);
 
+    //If user agrees to provide geo data we get the user's location, if not we use auto-ip (approximate location)
     navigator.geolocation.getCurrentPosition(
       (position) => setCity(position.coords.latitude + ' ' + position.coords.longitude),
       () => setCity('auto:ip')
@@ -45,7 +46,8 @@ export default function App() {
         flexDirection: 'column',
       }}
     >
-      <Header scale={scale} cheked={isScaleSwitchCheked} onChange={handleSwitchScale} />
+      <Header scale={scale} cheсked={isScaleSwitchCheked} onChange={handleSwitchScale} />
+
       <Grid
         container
         maxWidth='lg'
@@ -54,20 +56,26 @@ export default function App() {
           justifyContent: { xs: 'center', lg: 'flex-start' },
           flexGrow: '1',
           flexDirection: { lg: 'column' },
+          mx: { lg: 'auto' },
         }}
       >
         <Grid item xs={12}>
           <ControlPanel
-            handleSetCurrentLocation={setCurrentLocation}
-            handleSetCity={setCity}
+            onSetCurrentLocation={setCurrentLocation}
+            onSetCity={setCity}
             onError={setIsError}
           />
 
           {isError && <ErrorBox />}
 
-          {(city && <WeatherContentContainer onError={setIsError} city={city} scale={scale} />) || (
-            <SceletonContent />
-          )}
+          {(city && (
+            <WeatherContentContainer
+              onSetCity={setCity}
+              onError={setIsError}
+              city={city}
+              scale={scale}
+            />
+          )) || <SceletonContent />}
         </Grid>
       </Grid>
 

@@ -1,4 +1,6 @@
-import { Box, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material';
+import { Box, CardContent, CardHeader, Grid, Typography } from '@mui/material';
+
+import CustomCard from './CustomCard';
 
 export default function CurrentWeather({ city, country, time, temp, condition, max, min, imgSrc }) {
   return (
@@ -12,7 +14,7 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
         display: 'flex',
       }}
     >
-      <Card sx={{ flexGrow: 1 }}>
+      <CustomCard sx={{ flexGrow: 1 }}>
         <CardHeader title={`${city}, ${country} ${time}`} />
         <CardContent>
           <Box
@@ -23,8 +25,8 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
             }}
           >
             <Box>
-              <Typography sx={{ fontSize: '2.2rem', m: 0 }}>{Math.round(temp)}°</Typography>
-              <Typography sx={{ fontSize: '1.1rem' }}>{condition}</Typography>
+              <Typography sx={{ fontSize: 40, m: 0 }}>{Math.round(temp)}°</Typography>
+              <Typography sx={{ fontSize: 20 }}>{condition}</Typography>
               <Typography>
                 Max: {Math.round(max)}° min: {Math.round(min)}°
               </Typography>
@@ -34,7 +36,7 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
             </Box>
           </Box>
         </CardContent>
-      </Card>
+      </CustomCard>
     </Grid>
   );
 }

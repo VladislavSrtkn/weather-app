@@ -1,10 +1,10 @@
 import { AppBar, Toolbar, Typography, useScrollTrigger } from '@mui/material';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { Box } from '@mui/system';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
 import ScaleSwitch from './ScaleSwitch';
 
-export default function Header({ scale, cheked, onChange }) {
+export default function Header({ scale, cheсked, onChange }) {
   function scrollToTop() {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
@@ -29,7 +29,7 @@ export default function Header({ scale, cheked, onChange }) {
             MyWeather
           </Typography>
         </Box>
-        <ScaleSwitch label={scale} cheked={cheked} onChange={onChange} />
+        <ScaleSwitch label={scale} cheсked={cheсked} onChange={onChange} />
       </Toolbar>
     </AppBar>
   );

@@ -1,13 +1,12 @@
-import { Card } from '@mui/material';
-
+import CustomCard from './CustomCard';
 import FindMeButton from './FindMeButton';
 import SearchForm from './SearchForm';
 
-export default function ControlPanel({ handleSetCurrentLocation, handleSetCity, onError }) {
+export default function ControlPanel({ onSetCurrentLocation, onSetCity, onError }) {
   return (
-    <Card sx={{ display: 'flex', my: 2, gap: 1, px: 1, py: 2, maxWidth: { md: 700 } }}>
-      <FindMeButton onClick={handleSetCurrentLocation} />
-      <SearchForm onChange={handleSetCity} onError={onError} />
-    </Card>
+    <CustomCard sx={{ display: 'flex', my: 2, gap: 1, px: 1, py: 2, maxWidth: 700 }}>
+      <FindMeButton onClick={onSetCurrentLocation} />
+      <SearchForm onChange={onSetCity} onError={onError} />
+    </CustomCard>
   );
 }

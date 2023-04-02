@@ -54,6 +54,8 @@ export default function SearchForm({ onChange, onError }) {
     return { label, key: city.id };
   });
 
+  const textFieldColor = '#ffffff';
+
   return (
     <Box sx={{ flex: 1 }}>
       <Autocomplete
@@ -68,13 +70,37 @@ export default function SearchForm({ onChange, onError }) {
           <TextField
             {...params}
             value={searchValue}
+            sx={{
+              '& label.Mui-focused': {
+                color: textFieldColor,
+              },
+              '& .MuiInputLabel-root': { color: textFieldColor },
+              '& .MuiOutlinedInput-root': {
+                color: textFieldColor,
+                '& fieldset': {
+                  borderColor: textFieldColor,
+                },
+                '&:hover fieldset': {
+                  borderColor: textFieldColor,
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: textFieldColor,
+                },
+                '& .MuiIconButton-root': {
+                  color: textFieldColor,
+                },
+                '& .MuiInputLabel-root': {
+                  color: textFieldColor,
+                },
+              },
+            }}
             onChange={(e) => handleSearch(e.target.value)}
             label='Find a city'
             InputProps={{
               ...params.InputProps,
               endAdornment: (
                 <>
-                  {loading && <CircularProgress size={20} />}
+                  {loading && <CircularProgress size={20} sx={{ color: textFieldColor }} />}
                   {params.InputProps.endAdornment}
                 </>
               ),

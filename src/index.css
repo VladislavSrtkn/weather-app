@@ -2,7 +2,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(45deg, #1357a5, transparent);
+  background: linear-gradient(132deg, #5292e2, #0b43a8, #5292e2);
 }
 
 body * {

@@ -10,6 +10,10 @@ export default function SceletonContent() {
     <Box sx={{ display: 'flex', flexWrap: 'wrap', columnGap: 2 }}>
       <Skeleton
         variant='rounded'
+        sx={{ ...style, width: { xs: '100%' }, height: { xs: 404, lg: 504 } }}
+      />
+      <Skeleton
+        variant='rounded'
         sx={{ ...style, width: { xs: '100%', lg: '25%' }, height: { xs: 234, lg: 342 } }}
       />
       <Skeleton

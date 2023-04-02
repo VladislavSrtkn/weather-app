@@ -11,8 +11,9 @@ import SceletonContent from './SceletonContent';
 import ForecastHourly from './ForecastHourly';
 import CurrentWeather from './CurrentWeather';
 import TodayCondtions from './TodayConditions';
+import Map from './Map';
 
-export default function WeatherContentContainer({ city, scale, onError }) {
+export default function WeatherContentContainer({ city, scale, onError, onSetCity }) {
   const [status, setStatus] = useState('idle');
   const [weather, setWeather] = useState(null);
 
@@ -25,7 +26,7 @@ export default function WeatherContentContainer({ city, scale, onError }) {
         if (response.status === 200) {
           return response
             .json()
-            .then((result) => setWeather({ ...result }))
+            .then((result) => setWeather(result))
             .then(() => {
               setStatus('succeeded');
             });
@@ -51,20 +52,17 @@ export default function WeatherContentContainer({ city, scale, onError }) {
   }
 
   if (status === 'succeeded') {
+    const { lat, lon } = weather.location;
     const city = weather.location.name;
     const country = weather.location.country;
     const parsedTime = parse(weather.location.localtime, 'yyyy-M-dd H:m', new Date());
     const time = format(parsedTime, 'p');
     const temp = weather.current[`temp_${scale}`];
     const condition = weather.current.condition.text;
+    const imageSource = weather.current.condition.icon;
     const maxTemp = weather.forecast.forecastday[0].day[`maxtemp_${scale}`];
     const minTemp = weather.forecast.forecastday[0].day[`mintemp_${scale}`];
-    const imageSource = weather.current.condition.icon;
-    const formattedTime =
-      weather.location.localtime.length === 16
-        ? weather.location.localtime
-        : weather.location.localtime.slice(0, 11) + '0' + weather.location.localtime.slice(11);
-    const forecast = getHourlyForecast(formattedTime, weather.forecast.forecastday, 15);
+    const forecast = getHourlyForecast(parsedTime, weather.forecast.forecastday);
     const feelsLike = weather.current[`feelslike_${scale}`];
     const sunrise = weather.forecast.forecastday[0].astro.sunrise;
     const sunset = weather.forecast.forecastday[0].astro.sunset;
@@ -82,6 +80,8 @@ export default function WeatherContentContainer({ city, scale, onError }) {
 
     return (
       <Grid container sx={{ mb: 3 }}>
+        <Map coords={{ lat, lon }} onClick={onSetCity} />
+
         <CurrentWeather
           city={city}
           country={country}
@@ -92,7 +92,8 @@ export default function WeatherContentContainer({ city, scale, onError }) {
           min={minTemp}
           imgSrc={imageSource}
         />
-        <ForecastHourly forecastArray={forecast} city={city} country={country} scale={scale} />
+
+        <ForecastHourly forecast={forecast} city={city} country={country} scale={scale} />
 
         <TodayCondtions
           city={city}
