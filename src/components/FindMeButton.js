@@ -5,7 +5,9 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 export default function FindMeButton({ onClick }) {
   return (
     <Box sx={{ textAlign: 'center' }}>
-      <Typography sx={{ fontSize: 13 }}>Find me</Typography>
+      <Typography variant='caption' display='block'>
+        Find me
+      </Typography>
 
       <IconButton
         aria-label='Switch to current location'

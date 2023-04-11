@@ -17,8 +17,6 @@ export default function App() {
   const [scale, setScale] = useState(getScaleFromStorage());
   const [isError, setIsError] = useState(false);
 
-  const isScaleSwitchCheked = scale === 'c';
-
   useEffect(() => setCurrentLocation(), []);
   useEffect(() => setIsError(false), [city]);
 
@@ -46,7 +44,7 @@ export default function App() {
         flexDirection: 'column',
       }}
     >
-      <Header scale={scale} cheсked={isScaleSwitchCheked} onChange={handleSwitchScale} />
+      <Header scale={scale} onScaleChange={handleSwitchScale} />
 
       <Grid
         container

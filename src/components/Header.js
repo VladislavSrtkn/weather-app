@@ -4,7 +4,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
 import ScaleSwitch from './ScaleSwitch';
 
-export default function Header({ scale, cheсked, onChange }) {
+export default function Header({ scale, onScaleChange }) {
   function scrollToTop() {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
@@ -29,7 +29,7 @@ export default function Header({ scale, cheсked, onChange }) {
             MyWeather
           </Typography>
         </Box>
-        <ScaleSwitch label={scale} cheсked={cheсked} onChange={onChange} />
+        <ScaleSwitch label={scale} onChange={onScaleChange} />
       </Toolbar>
     </AppBar>
   );

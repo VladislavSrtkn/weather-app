@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 
+import apiKeys from '../config';
 import getHourlyForecast from '../getHourlyForecast';
 
 import SceletonContent from './SceletonContent';
@@ -20,7 +21,7 @@ export default function WeatherContentContainer({ city, scale, onError, onSetCit
   useEffect(() => {
     setStatus('loading');
     fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=c24794a3208345fb9e382502222112&q=${city}&aqi=no&days=3`
+      `https://api.weatherapi.com/v1/forecast.json?key=${apiKeys.weatherApi}&q=${city}&aqi=no&days=3`
     )
       .then((response) => {
         if (response.status === 200) {
@@ -34,7 +35,9 @@ export default function WeatherContentContainer({ city, scale, onError, onSetCit
           setStatus('failed');
           onError(true);
           console.log(
-            'API request failed, code: ' +
+            'Response body: ' +
+              response.body +
+              'API request failed, code: ' +
               response.status +
               '. About type of error: https://www.weatherapi.com/docs/'
           );

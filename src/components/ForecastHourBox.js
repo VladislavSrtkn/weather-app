@@ -17,9 +17,13 @@ export default function ForecastHourBox({ time, imgAlt, imgSrc, temp }) {
         justifyContent: 'space-between',
       }}
     >
-      <Typography sx={{ ...style, fontSize: 14, flexGrow: 1 }}>{time}</Typography>
+      <Typography variant='body2' sx={{ ...style, flexGrow: 1 }}>
+        {time}
+      </Typography>
       <img alt={imgAlt} width={40} src={imgSrc}></img>
-      <Typography sx={style}>{temp}°</Typography>
+      <Typography variant='body1' sx={style}>
+        {temp}°
+      </Typography>
     </Box>
   );
 }

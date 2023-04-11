@@ -3,10 +3,10 @@ export function getScaleFromStorage() {
 
   if (!scale) {
     return 'c';
-  } else return JSON.parse(scale).scale;
+  }
+  return scale;
 }
 
 export function setScaleToStorage(scale) {
-  const json = JSON.stringify({ scale });
-  localStorage.setItem('scale', json);
+  localStorage.setItem('scale', scale);
 }

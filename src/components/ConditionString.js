@@ -11,10 +11,10 @@ export default function ConditionString({ icon, text, value }) {
           py: 2,
         }}
       >
-        <Typography sx={{ px: { md: 2 } }}>
+        <Typography variant='body1' sx={{ px: { md: 2 } }}>
           {icon} {text}
         </Typography>
-        <Typography>{value}</Typography>
+        <Typography variant='body1'>{value}</Typography>
       </Box>
     </Grid>
   );

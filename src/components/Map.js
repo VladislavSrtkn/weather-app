@@ -6,6 +6,8 @@ import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
 
 import React, { useState } from 'react';
 
+import apiKeys from '../config';
+
 import CustomCard from './CustomCard';
 
 const containerStyle = {
@@ -15,7 +17,7 @@ const containerStyle = {
 };
 
 export default function Map({ coords, onClick }) {
-  const [open, setOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
 
   const center = {
     lat: +coords.lat,
@@ -24,7 +26,7 @@ export default function Map({ coords, onClick }) {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCCB7g-FTzUToVaw3x9viKEaqMUN_tSoiA',
+    googleMapsApiKey: apiKeys.googleMap,
   });
 
   function handleSetCity(e) {
@@ -35,19 +37,19 @@ export default function Map({ coords, onClick }) {
   }
 
   return (
-    isLoaded && (
-      <Grid item xs={12} sx={{ my: 3 }}>
-        <CustomCard>
-          <CardHeader
-            title='Use map to find the location'
-            action={
-              <IconButton onClick={() => setOpen(!open)} sx={{ color: '#ffffff' }}>
-                {(open && <KeyboardArrowUpIcon />) || <KeyboardArrowDownIcon />}
-              </IconButton>
-            }
-          />
-          {open && (
-            <CardContent sx={{ height: { xs: 300, lg: 400 } }}>
+    <Grid item xs={12} sx={{ my: 3 }}>
+      <CustomCard>
+        <CardHeader
+          title='Use map to find the location'
+          action={
+            <IconButton onClick={() => setIsOpen(!isOpen)} sx={{ color: '#ffffff' }}>
+              {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          }
+        />
+        {isOpen && (
+          <CardContent sx={{ height: { xs: 300, lg: 400 } }}>
+            {isLoaded && (
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
@@ -56,10 +58,10 @@ export default function Map({ coords, onClick }) {
               >
                 <MarkerF position={center} />
               </GoogleMap>
-            </CardContent>
-          )}
-        </CustomCard>
-      </Grid>
-    )
+            )}
+          </CardContent>
+        )}
+      </CustomCard>
+    </Grid>
   );
 }

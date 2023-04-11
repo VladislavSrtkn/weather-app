@@ -25,8 +25,12 @@ export default function CurrentWeather({ city, country, time, temp, condition, m
             }}
           >
             <Box>
-              <Typography sx={{ fontSize: 40, m: 0 }}>{Math.round(temp)}°</Typography>
-              <Typography sx={{ fontSize: 20 }}>{condition}</Typography>
+              <Typography variant='h3' component='p' sx={{ m: 0 }}>
+                {Math.round(temp)}°
+              </Typography>
+              <Typography variant='h6' component='p'>
+                {condition}
+              </Typography>
               <Typography>
                 Max: {Math.round(max)}° min: {Math.round(min)}°
               </Typography>

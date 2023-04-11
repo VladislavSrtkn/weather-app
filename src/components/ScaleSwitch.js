@@ -43,7 +43,7 @@ export default function ScaleSwitch({ cheсked, label, onChange }) {
       labelPlacement='start'
       sx={{ justifyContent: 'flex-end', m: 0 }}
       control={<MaterialUISwitch checked={cheсked} onChange={onChange} />}
-      label={<Typography>°{label.toUpperCase()}</Typography>}
+      label={<Typography variant='body1'>°{label.toUpperCase()}</Typography>}
     />
   );
 }

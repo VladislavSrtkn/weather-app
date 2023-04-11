@@ -4,23 +4,25 @@ import { Box } from '@mui/system';
 import { useState } from 'react';
 import React from 'react';
 
+import apiKeys from '../config';
+
 export default function SearchForm({ onChange, onError }) {
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleSearch(value) {
     setSearchValue(value);
-    setLoading(true);
+    setIsLoading(true);
 
     if (value === '') {
       setSearchResults([]);
       onError(false);
-      setLoading(false);
+      setIsLoading(false);
       return;
     }
 
-    fetch(`https://api.weatherapi.com/v1/search.json?key=c24794a3208345fb9e382502222112&q=${value}`)
+    fetch(`https://api.weatherapi.com/v1/search.json?key=${apiKeys.weatherApi}&q=${value}`)
       .then((response) => {
         if (response.status === 200) {
           onError(false);
@@ -28,7 +30,9 @@ export default function SearchForm({ onChange, onError }) {
         } else {
           onError(true);
           console.log(
-            'API request failed, code: ' +
+            'Response body: ' +
+              response.body +
+              'API request failed, code: ' +
               response.status +
               '. About type of error: https://www.weatherapi.com/docs/'
           );
@@ -38,13 +42,13 @@ export default function SearchForm({ onChange, onError }) {
         onError(true);
         console.log('Error: ' + err.message);
       })
-      .finally(setTimeout(() => setLoading(false), 500));
+      .finally(setTimeout(() => setIsLoading(false), 500));
   }
 
   function handleSetCity(city) {
     setSearchResults([]);
     setSearchValue('');
-    setLoading(false);
+    setIsLoading(false);
 
     onChange(city);
   }
@@ -62,7 +66,7 @@ export default function SearchForm({ onChange, onError }) {
         options={cities}
         freeSolo
         value={searchValue}
-        onBlur={() => setLoading(false)}
+        onBlur={() => setIsLoading(false)}
         onInputChange={(e, value, reason) => (reason === 'clear' ? handleSearch('') : undefined)}
         fullWidth
         onChange={(e, city) => (city ? handleSetCity(city.label) : undefined)}
@@ -100,7 +104,7 @@ export default function SearchForm({ onChange, onError }) {
               ...params.InputProps,
               endAdornment: (
                 <>
-                  {loading && <CircularProgress size={20} sx={{ color: textFieldColor }} />}
+                  {isLoading && <CircularProgress size={20} sx={{ color: textFieldColor }} />}
                   {params.InputProps.endAdornment}
                 </>
               ),
@@ -109,7 +113,7 @@ export default function SearchForm({ onChange, onError }) {
         )}
         renderOption={(props, option) => (
           <li {...props} key={option.key}>
-            <Typography>{option.label}</Typography>
+            <Typography variant='body1'>{option.label}</Typography>
           </li>
         )}
       />
