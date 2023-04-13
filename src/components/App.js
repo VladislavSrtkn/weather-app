@@ -14,7 +14,7 @@ import ControlPanel from './ControlPanel';
 
 export default function App() {
   const [city, setCity] = useState(null);
-  const [scale, setScale] = useState(getScaleFromStorage());
+  const [scale, setScale] = useState(() => getScaleFromStorage());
   const [isError, setIsError] = useState(false);
 
   useEffect(() => setCurrentLocation(), []);
@@ -33,7 +33,7 @@ export default function App() {
   function handleSwitchScale() {
     const newScale = scale === 'c' ? 'f' : 'c';
     setScaleToStorage(newScale);
-    setScale(getScaleFromStorage());
+    setScale(() => getScaleFromStorage());
   }
 
   return (
