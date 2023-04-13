@@ -59,6 +59,30 @@ export default function SearchForm({ onChange, onError }) {
   });
 
   const textFieldColor = '#ffffff';
+  const textFieldStyles = {
+    '& label.Mui-focused': {
+      color: textFieldColor,
+    },
+    '& .MuiInputLabel-root': { color: textFieldColor },
+    '& .MuiOutlinedInput-root': {
+      color: textFieldColor,
+      '& fieldset': {
+        borderColor: textFieldColor,
+      },
+      '&:hover fieldset': {
+        borderColor: textFieldColor,
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: textFieldColor,
+      },
+      '& .MuiIconButton-root': {
+        color: textFieldColor,
+      },
+      '& .MuiInputLabel-root': {
+        color: textFieldColor,
+      },
+    },
+  };
 
   return (
     <Box sx={{ flex: 1 }}>
@@ -74,30 +98,7 @@ export default function SearchForm({ onChange, onError }) {
           <TextField
             {...params}
             value={searchValue}
-            sx={{
-              '& label.Mui-focused': {
-                color: textFieldColor,
-              },
-              '& .MuiInputLabel-root': { color: textFieldColor },
-              '& .MuiOutlinedInput-root': {
-                color: textFieldColor,
-                '& fieldset': {
-                  borderColor: textFieldColor,
-                },
-                '&:hover fieldset': {
-                  borderColor: textFieldColor,
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: textFieldColor,
-                },
-                '& .MuiIconButton-root': {
-                  color: textFieldColor,
-                },
-                '& .MuiInputLabel-root': {
-                  color: textFieldColor,
-                },
-              },
-            }}
+            sx={textFieldStyles}
             onChange={(e) => handleSearch(e.target.value)}
             label='Find a city'
             InputProps={{

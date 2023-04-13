@@ -48,7 +48,8 @@ export default function WeatherContentContainer({ city, scale, onError, onSetCit
         onError(true);
         console.log('Error: ' + err.message);
       });
-  }, [city, onError]);
+    // eslint-disable-next-line
+  }, [city]);
 
   if (status === 'loading') {
     return <SceletonContent />;
